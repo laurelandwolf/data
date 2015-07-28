@@ -1,3 +1,6 @@
 spike
+
 node_modules
+src/state/node_modules
+
 npm-debug.*

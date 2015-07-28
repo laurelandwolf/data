@@ -1,0 +1,19 @@
+{
+  "name": "lw-state",
+  "version": "0.0.1",
+  "description": "All the state stuff",
+  "scripts": {
+    "test": "hihat __test__/*js -- -t babelify -p tap-dev-tool"
+  },
+  "dependencies": {
+    "lodash": "^3.10.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.3",
+    "hihat": "^2.3.0",
+    "is-promise": "^2.0.0",
+    "tap-dev-tool": "^1.3.0",
+    "tap-spec": "^4.0.2",
+    "tape": "^4.0.1"
+  }
+}

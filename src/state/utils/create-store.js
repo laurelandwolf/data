@@ -1,4 +1,5 @@
 import cloneDeep from 'lodash/lang/clonedeep';
+import raf from 'raf';
 
 // TODO: handle passing in multiple reducers
 export default function createStore (reducer, initialState = {}) {
@@ -6,6 +7,12 @@ export default function createStore (reducer, initialState = {}) {
   let currentState = cloneDeep(initialState);
   let subscribers = [];
   let dispatchCharged = false;
+
+  function notifySubscribers () {
+
+    subscribers.forEach(sub => sub());
+    dispatchCharged = false;
+  }
 
   return {
     getState () {
@@ -26,11 +33,7 @@ export default function createStore (reducer, initialState = {}) {
 
       if (!dispatchCharged) {
         dispatchCharged = true;
-        setTimeout(function () {
-
-          subscribers.forEach(sub => sub());
-          dispatchCharged = false;
-        }, 0);
+        raf(notifySubscribers);
       }
 
       currentState = reducer(currentState, action);

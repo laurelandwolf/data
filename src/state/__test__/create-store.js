@@ -91,3 +91,30 @@ test('argument order in reducers', ({equal, deepEqual}) => {
     store.dispatch({type: 'test'});
   };
 });
+
+test.skip('multiple reducers', () => {
+
+  let initialState = {
+    reducer1: 'foo',
+    reducer2: 'bar'
+  };
+  function reducer1 (state, action) {
+
+  }
+  function reducer2 (state, action) {
+
+  }
+
+  let store = createStore({reducer1, reducer1}, initialState);
+
+  return function (end) {
+
+    store.subscribe(() => {
+
+
+
+      end();
+    });
+    store.dispatch();
+  };
+});

@@ -24,7 +24,13 @@ function namespace (name, setup = {}) {
       };
 
       //
-      let ret = fn(t);
+      let ret = fn({
+        equal: t.equal,
+        deepEqual: t.deepEqual,
+        pass: t.pass,
+        fail: t.fail,
+        context: t.context
+      });
 
       // Promise
       if (isPromise(ret)) {
@@ -58,6 +64,8 @@ function namespace (name, setup = {}) {
     tester(...args);
     tapeFn = tape;
   };
+
+  tester.skip = (...args) => {};
 
   return tester;
 }

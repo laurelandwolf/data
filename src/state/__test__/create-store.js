@@ -28,8 +28,6 @@ test('store state', ({deepEqual, equal, context}) => {
 
   store.dispatch({});
   deepEqual(store.getState(), {state: 'new'}, 'sets state from reducers');
-
-
 });
 
 test('subscxribe to store', ({deepEqual, context}) => {
@@ -92,6 +90,7 @@ test('argument order in reducers', ({equal, deepEqual}) => {
   };
 });
 
+// See: https://github.com/gaearon/redux/blob/improve-docs/docs/store.md
 test.skip('multiple reducers', () => {
 
   let initialState = {

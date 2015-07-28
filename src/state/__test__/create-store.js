@@ -66,3 +66,28 @@ test('unsubscribe from store', ({context, equal}) => {
     store.dispatch({});
   };
 });
+
+test('argument order in reducers', ({equal, deepEqual}) => {
+
+  let called = false;
+
+  function reducer (state, action) {
+
+    called = true;
+
+    deepEqual(state, {foo: 'bar'}, 'state passed as 1st argument');
+    deepEqual(action, {type: 'test'}, 'action passed as 2nd argument');
+  }
+
+  let store = createStore(reducer, {foo: 'bar'});
+
+  return function (end) {
+
+    store.subscribe(() => {
+
+      equal(called, true, 'called reducer');
+      end()
+    });
+    store.dispatch({type: 'test'});
+  };
+});

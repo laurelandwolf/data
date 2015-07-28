@@ -33,10 +33,7 @@ export default function createStore (reducer, initialState = {}) {
         }, 0);
       }
 
-      currentState = reducer({
-        action,
-        state: currentState
-      });
+      currentState = reducer(currentState, action);
     }
   };
 };

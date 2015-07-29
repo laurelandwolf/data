@@ -1,10 +1,10 @@
 require('es6-promise').polyfill();
 
 import {namespace} from './utils/testing';
-import bindActions from '../utils/bind-actions';
+import bindActionsCreators from '../utils/bind-actions-creators';
 import createStore from '../utils/create-store';
 
-let test = namespace('bindActions');
+let test = namespace('bindActionsCreators');
 
 const TEST_ACTION = 'TEST_ACTION';
 
@@ -38,7 +38,7 @@ test('dispatches on action execution', ({deepEqual, context}) => {
     }
   }
 
-  let actionCreators = bindActions({testAction}, store.dispatch);
+  let actionCreators = bindActionsCreators({testAction}, store.dispatch);
   actionCreators.testAction('bar');
 
   return function (end) {
@@ -65,7 +65,7 @@ test('action returns a thunk', ({context, deepEqual}) => {
     };
   }
 
-  let actionCreators = bindActions({testAction}, store.dispatch);
+  let actionCreators = bindActionsCreators({testAction}, store.dispatch);
   actionCreators.testAction('bar');
 
   return function (end) {
@@ -92,7 +92,7 @@ test('action returns a promise', ({context, deepEqual}) => {
     });
   }
 
-  let actionCreators = bindActions({testAction}, store.dispatch);
+  let actionCreators = bindActionsCreators({testAction}, store.dispatch);
   actionCreators.testAction('bar');
 
   return function (end) {

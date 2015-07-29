@@ -1,0 +1,17 @@
+{
+  "name": "lw-data",
+  "version": "0.0.1",
+  "description": "Data",
+  "main": "src/index.js",
+  "scripts": {
+    "postinstall": "linklocal"
+  },
+  "dependencies": {
+    "lw-api": "file:./src/api",
+    "lw-serialize": "file:./src/serialize",
+    "lw-state": "file:./src/state"
+  },
+  "devDependencies": {
+    "linklocal": "^2.5.2"
+  }
+}

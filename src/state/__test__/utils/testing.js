@@ -29,6 +29,8 @@ function namespace (name, setup = {}) {
         deepEqual: t.deepEqual,
         pass: t.pass,
         fail: t.fail,
+        notDeepEqual: t.notDeepEqual,
+        notEqual: t.notEqual,
         context: t.context
       });
 

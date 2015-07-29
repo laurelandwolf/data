@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "All the state stuff",
   "scripts": {
-    "test": "hihat __test__/*js -- -t babelify -p tap-dev-tool"
+    "test": "hihat __test__/*js -- -t [babelify --stage 0] -p tap-dev-tool"
   },
   "dependencies": {
+    "freezer-js": "^0.5.2",
     "lodash": "^3.10.0"
   },
   "devDependencies": {

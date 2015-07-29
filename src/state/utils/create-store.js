@@ -1,10 +1,11 @@
 import cloneDeep from 'lodash/lang/clonedeep';
 import raf from 'raf';
+import Freezer from 'freezer-js';
 
 // TODO: handle passing in multiple reducers
 export default function createStore (reducer, initialState = {}) {
 
-  let currentState = cloneDeep(initialState);
+  let currentState = new Freezer(initialState);
   let subscribers = [];
   let dispatchCharged = false;
 
@@ -14,11 +15,18 @@ export default function createStore (reducer, initialState = {}) {
     dispatchCharged = false;
   }
 
-  return {
-    getState () {
+  function getState () {
 
-      return currentState
-    },
+    return currentState.get();
+  }
+
+  function replaceState (nextState) {
+
+    currentState.get().reset(nextState);
+  }
+
+  return {
+    getState,
     subscribe (fn) {
 
       subscribers.push(fn);
@@ -36,7 +44,7 @@ export default function createStore (reducer, initialState = {}) {
         raf(notifySubscribers);
       }
 
-      currentState = reducer(currentState, action);
+      replaceState(reducer(getState(), action));
     }
   };
 };

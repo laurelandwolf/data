@@ -1,3 +1,5 @@
+import Freezer from 'freezer-js';
+
 import {namespace} from './utils/testing';
 import createStore from '../utils/create-store';
 
@@ -30,7 +32,7 @@ test('store state', ({deepEqual, equal, context}) => {
   deepEqual(store.getState(), {state: 'new'}, 'sets state from reducers');
 });
 
-test('subscxribe to store', ({deepEqual, context}) => {
+test('subscribe to store', ({deepEqual, context}) => {
 
   let initialState = {foo: 'bar'};
   let store = createStore(context.reducer, initialState);
@@ -115,5 +117,44 @@ test.skip('multiple reducers', () => {
       end();
     });
     store.dispatch();
+  };
+});
+
+test('immutable data', ({context, equal, notEqual}) => {
+
+  function immutableTestReducer (state, action) {
+    switch(action.type) {
+      default:
+        return {
+          ...state,
+          foo: {
+            bar: 'baz'
+          }
+        };
+    }
+  }
+
+  let initialState = {
+    foo: {
+      bar: 'baz'
+    },
+    test: {
+      me: 'now'
+    }
+  };
+  let store = createStore(immutableTestReducer, initialState);
+  let immutableState = store.getState();
+
+  store.dispatch({});
+
+  return function (end) {
+
+    store.subscribe(() => {
+
+      // Shallow equal comparison proves that the reference is the same
+      equal(store.getState().test, immutableState.test, 'only updated reference on changed tree');
+      notEqual(store.getState().foo, immutableState.foo, 'new tree created for state updated');
+      end();
+    });
   };
 });

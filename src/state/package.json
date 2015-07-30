@@ -1,6 +1,6 @@
 {
   "name": "lw-state",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "All the state stuff",
   "main": "index.js",
   "scripts": {

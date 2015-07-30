@@ -1,5 +1,3 @@
-require('es6-promise').polyfill();
-
 import {namespace} from 'tessed';
 import bindActionsCreators from 'lw-state/bind-actions-creators';
 import createStore from 'lw-state/create-store';

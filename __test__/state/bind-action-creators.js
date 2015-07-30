@@ -1,8 +1,8 @@
 require('es6-promise').polyfill();
 
-import {namespace} from './utils/testing';
-import bindActionsCreators from '../utils/bind-actions-creators';
-import createStore from '../utils/create-store';
+import {namespace} from 'tessed';
+import bindActionsCreators from 'lw-state/bind-actions-creators';
+import createStore from 'lw-state/create-store';
 
 let test = namespace('bindActionsCreators');
 

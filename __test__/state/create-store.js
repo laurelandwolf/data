@@ -1,7 +1,7 @@
 import Freezer from 'freezer-js';
 
-import {namespace} from './utils/testing';
-import createStore from '../utils/create-store';
+import {namespace} from 'tessed';
+import createStore from 'lw-state/create-store';
 
 let test = namespace('createStore');
 

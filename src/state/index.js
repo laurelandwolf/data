@@ -9,5 +9,7 @@ export default function (initialState = {}) {
 
   return {
     ...store
+    reducers,
+    actionCreators
   };
 };

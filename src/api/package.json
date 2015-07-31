@@ -1,9 +1,0 @@
-{
-  "name": "lw-api",
-  "version": "1.0.0",
-  "dependencies": {
-    "join-path": "^1.0.1",
-    "lodash": "^3.10.0",
-    "merge": "^1.2.0"
-  }
-}

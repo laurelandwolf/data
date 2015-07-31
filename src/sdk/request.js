@@ -6,11 +6,11 @@ import merge from 'merge';
 function request (spec = {}) {
 
   if (!window.Promise) {
-    throw new Error('window.Promise not supported. Please provided a plolyfill.');
+    throw new Error('window.Promise not supported. Please provide a plolyfill.');
   }
 
   if (!window.fetch) {
-    throw new Error('window.fetch not supported. Please provided a plolyfill.');
+    throw new Error('window.fetch not supported. Please provide a plolyfill.');
   }
 
   let origin = spec.origin || '';

@@ -1,0 +1,180 @@
+{
+  "data": {
+    "id": "15038",
+    "type": "projects",
+    "attributes": {
+      "title": "Scott Corgan's Living Room",
+      "style": "modern",
+      "package": "classic",
+      "location": "Marina del Rey, California",
+      "household-size": "2",
+      "timeline": null,
+      "home-ownership": null,
+      "access": null,
+      "moving-details": null,
+      "pets": "cat",
+      "children": "asdf",
+      "preferred-stores": "",
+      "rejected-stores": null,
+      "other-details": "The simpsons toy story cornrows roseanne, chuck taylor all-stars baby got back highlights dawg dj jazzy jeff piercings. Christina aguilera sitcom netscape navigator lisa frank. Tom cruise whitney houston no fear t-shirts pontiac trans sport the truman show. Bowl cut track jackets snapback hats steve urkel. Forrest gump vanilla ice neon colors oversized sweaters.",
+      "state": "launched",
+      "submission-state": "open",
+      "revision-state": "closed",
+      "created-at": "2015-03-24T11:58:34.861-07:00",
+      "updated-at": "2015-07-16T10:19:58.075-07:00"
+    },
+    "relationships": {
+      "submission-room": {
+        "data": null
+      },
+      "rooms": {
+        "data": [
+          {
+            "type": "rooms",
+            "id": "26098"
+          }
+        ]
+      },
+      "comments": {
+        "data": []
+      },
+      "floor-plans": {
+        "data": [
+          {
+            "type": "floor-plans",
+            "id": "20"
+          },
+          {
+            "type": "floor-plans",
+            "id": "24"
+          }
+        ]
+      },
+      "submissions": {
+        "data": []
+      }
+    }
+  },
+  "included": [
+    {
+      "id": "26098",
+      "type": "rooms",
+      "attributes": {
+        "room-type": "living_room",
+        "budget": null,
+        "length": 12.0,
+        "width": 12.0,
+        "height": 0.0,
+        "other-details": null,
+        "designed-for": "asdf",
+        "room-uses": [
+          "work",
+          "television",
+          "play",
+          "dining",
+          "entertaining"
+        ],
+        "room-feels": [
+          "cozy",
+          "formal"
+        ],
+        "seating": "large",
+        "shares": [
+          "kids",
+          "pets"
+        ],
+        "repaint": "yes",
+        "wallpaper": "yes",
+        "window-coverings": "not_sure",
+        "created-at": "2015-03-24T11:58:34.868-07:00",
+        "updated-at": "2015-07-16T10:19:58.073-07:00"
+      },
+      "relationships": {
+        "inspiration-links": {
+          "data": []
+        },
+        "inspiration-images": {
+          "data": []
+        },
+        "photos": {
+          "data": [
+            {
+              "type": "photos",
+              "id": "14941"
+            }
+          ]
+        },
+        "furniture": {
+          "data": []
+        },
+        "project": {
+          "data": {
+            "type": "projects",
+            "id": "15038"
+          }
+        }
+      }
+    },
+    {
+      "id": "14941",
+      "type": "photos",
+      "attributes": {
+        "body": null,
+        "image": {
+          "square": "/system/current_room_photos/images/000/014/941/square/4th-of-july-animals-1-2-5-6-8-0-5-4-1.jpg?1437067197",
+          "small": "/system/current_room_photos/images/000/014/941/small/4th-of-july-animals-1-2-5-6-8-0-5-4-1.jpg?1437067197",
+          "large": "/system/current_room_photos/images/000/014/941/large/4th-of-july-animals-1-2-5-6-8-0-5-4-1.jpg?1437067197",
+          "original": "/system/current_room_photos/images/000/014/941/original/4th-of-july-animals-1-2-5-6-8-0-5-4-1.png?1437067197"
+        },
+        "created-at": "2015-07-16T10:19:53.203-07:00",
+        "updated-at": "2015-07-16T10:19:57.651-07:00"
+      },
+      "relationships": {
+        "room": {
+          "data": {
+            "type": "rooms",
+            "id": "26098"
+          }
+        }
+      }
+    },
+    {
+      "id": "20",
+      "type": "floor-plans",
+      "attributes": {
+        "image": {
+          "original": "/system/project/floor_plans/images/000/000/020/original/uploads_2F1436993812126-b2kk9z2knxumzpvi-vda23zzm68l7hkt9_2FEverythingGoats_2015-Jun-26.jpg?1436993813"
+        },
+        "created-at": "2015-07-15T13:56:53.898-07:00",
+        "updated-at": "2015-07-15T13:56:53.898-07:00"
+      },
+      "relationships": {
+        "project": {
+          "data": {
+            "type": "projects",
+            "id": "15038"
+          }
+        }
+      }
+    },
+    {
+      "id": "24",
+      "type": "floor-plans",
+      "attributes": {
+        "image": {
+          "original": "/system/project/floor_plans/images/000/000/024/original/uploads_2F1436997271031-htd95zyfyxas8aor-vull7dyw2ou8r529_2F59374066.jpg?1436997272"
+        },
+        "created-at": "2015-07-15T14:54:32.697-07:00",
+        "updated-at": "2015-07-15T14:54:32.697-07:00"
+      },
+      "relationships": {
+        "project": {
+          "data": {
+            "type": "projects",
+            "id": "15038"
+          }
+        }
+      }
+    }
+  ]
+}

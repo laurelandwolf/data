@@ -4,13 +4,13 @@
   "description": "Data",
   "main": "src/index.js",
   "scripts": {
-    "preinstall": "cd src/api && npm install && cd ../state && npm install && cd ../..",
+    "preinstall": "cd src/sdk && npm install && cd ../state && npm install && cd ../..",
     "postinstall": "linklocal",
-    "test": "hihat __test__/state/*.js __test__/api/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
-    "test-ci": "zuul -- __test__/state/*.js __test__/api/*.js"
+    "test": "hihat __test__/state/*.js __test__/sdk/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
+    "test-ci": "zuul -- __test__/state/*.js __test__/sdk/*.js"
   },
   "dependencies": {
-    "lw-api": "file:./src/api",
+    "lw-sdk": "file:./src/sdk",
     "lw-serialize": "file:./src/serialize",
     "lw-state": "file:./src/state"
   },

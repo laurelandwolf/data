@@ -1,15 +1,4 @@
 {
   "name": "lw-state",
-  "version": "1.0.0",
-  "description": "All the state stuff",
-  "main": "index.js",
-  "scripts": {
-    "test": "hihat __test__/*js -- -t [babelify --stage 0] -p tap-dev-tool"
-  },
-  "dependencies": {
-    "freezer-js": "^0.5.2",
-    "is-promise": "^2.0.0",
-    "lodash": "^3.10.0",
-    "raf": "^3.1.0"
-  }
+  "version": "1.0.0"
 }

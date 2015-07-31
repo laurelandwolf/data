@@ -1,4 +1,3 @@
-import cloneDeep from 'lodash/lang/clonedeep';
 import raf from 'raf';
 import Freezer from 'freezer-js';
 
@@ -47,4 +46,4 @@ export default function createStore (reducer, initialState = {}) {
       replaceState(reducer(getState(), action));
     }
   };
-};
+}

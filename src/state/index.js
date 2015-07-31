@@ -8,8 +8,8 @@ export default function (initialState = {}) {
   let store = createStore(reducers, initialState);
 
   return {
-    ...store
+    ...store,
     reducers,
     actionCreators
   };
-};
+}

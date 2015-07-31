@@ -17,8 +17,8 @@ export default function bindActions (actions, dispatch) {
       }
 
       return dispatch(action);
-    }
+    };
   });
 
   return boundActions;
-};
+}

@@ -1,7 +1,4 @@
 {
   "name": "lw-serialize",
-  "version": "0.0.1",
-  "dependencies": {
-    "lodash": "^3.10.0"
-  }
+  "version": "0.0.1"
 }

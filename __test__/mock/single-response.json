@@ -1,0 +1,223 @@
+{
+  "data": {
+    "id": "31944",
+    "type": "projects",
+    "attributes": {
+      "title": "Scott Corgan's Living Room and Master Bedroom",
+      "style": "modern",
+      "package": "light",
+      "location": "",
+      "timeline": null,
+      "timeline-other": null,
+      "other-details": null,
+      "state": "launched",
+      "submission-state": "closed",
+      "revision-state": "open",
+      "household-size": null,
+      "reason": [],
+      "reason-other": null,
+      "home-ownership": null,
+      "home-ownership-other": null,
+      "access": null,
+      "access-other": null,
+      "moving-details": null,
+      "pets": null,
+      "children": null,
+      "preferred-stores": null,
+      "rejected-stores": null,
+      "created-at": "2015-07-31T11:05:01.745-07:00",
+      "updated-at": "2015-07-31T15:00:34.144-07:00"
+    },
+    "relationships": {
+      "submission-room": {
+        "data": {
+          "type": "rooms",
+          "id": "70683"
+        }
+      },
+      "design-package": {
+        "data": null
+      },
+      "winner": {
+        "data": {
+          "type": "designers",
+          "id": "387"
+        }
+      },
+      "logo": {
+        "data": null
+      },
+      "rooms": {
+        "data": [
+          {
+            "type": "rooms",
+            "id": "70684"
+          },
+          {
+            "type": "rooms",
+            "id": "70683"
+          }
+        ]
+      },
+      "comments": {
+        "data": []
+      },
+      "floor-plans": {
+        "data": []
+      },
+      "submissions": {
+        "data": []
+      }
+    }
+  },
+  "included": [
+    {
+      "id": "70683",
+      "type": "rooms",
+      "attributes": {
+        "title": "Living Room",
+        "room-type": "living_room",
+        "budget": "large",
+        "budget-other": "",
+        "length": "1123.0",
+        "width": "123.0",
+        "height": "0.0",
+        "other-details": "",
+        "designed-for": "",
+        "room-uses": [],
+        "room-uses-other": "",
+        "room-feels": [
+          "cozy",
+          "formal"
+        ],
+        "seating": "medium",
+        "seating-other": "",
+        "shares": [],
+        "repaint": "yes",
+        "wallpaper": "yes",
+        "window-coverings": "yes",
+        "preferred-color": "",
+        "dimensions-text": "Room dimensions: 1123L x 123W",
+        "created-at": "2015-07-31T11:05:01.774-07:00",
+        "updated-at": "2015-07-31T15:00:34.137-07:00"
+      },
+      "relationships": {
+        "inspiration-links": {
+          "data": [
+            {
+              "type": "inspiration-links",
+              "id": "9"
+            },
+            {
+              "type": "inspiration-links",
+              "id": "10"
+            }
+          ]
+        },
+        "inspiration-images": {
+          "data": []
+        },
+        "photos": {
+          "data": []
+        },
+        "furniture": {
+          "data": []
+        },
+        "project": {
+          "data": {
+            "type": "projects",
+            "id": "31944"
+          }
+        },
+        "something-else": {
+          "data": {
+            "type": "something-else",
+            "id": "1"
+          }
+        }
+      }
+    },
+    {
+      "id": "70684",
+      "type": "rooms",
+      "attributes": {
+        "title": "Master Bedroom",
+        "room-type": "master_bedroom",
+        "budget": "extra_large",
+        "budget-other": "",
+        "length": "12.0",
+        "width": "123.0",
+        "height": "0.0",
+        "other-details": "",
+        "designed-for": "",
+        "bed-size": "",
+        "bed-needs": "frame",
+        "storage": "no",
+        "storage-other": "",
+        "lighting": "yes",
+        "blackout-drapes": "yes",
+        "room-feels": [],
+        "repaint": "yes",
+        "wallpaper": "yes",
+        "preferred-color": "",
+        "dimensions-text": "Room dimensions: 12L x 123W",
+        "created-at": "2015-07-31T11:05:01.786-07:00",
+        "updated-at": "2015-07-31T11:07:37.749-07:00"
+      },
+      "relationships": {
+        "inspiration-links": {
+          "data": []
+        },
+        "inspiration-images": {
+          "data": []
+        },
+        "photos": {
+          "data": []
+        },
+        "furniture": {
+          "data": []
+        },
+        "project": {
+          "data": {
+            "type": "projects",
+            "id": "31944"
+          }
+        }
+      }
+    },
+    {
+      "id": "9",
+      "type": "inspiration-links",
+      "attributes": {
+        "url": "qweg",
+        "created-at": "2015-07-31T15:00:43.362-07:00",
+        "updated-at": "2015-07-31T15:00:43.362-07:00"
+      },
+      "relationships": {
+        "room": {
+          "data": {
+            "type": "rooms",
+            "id": "70683"
+          }
+        }
+      }
+    },
+    {
+      "id": "10",
+      "type": "inspiration-links",
+      "attributes": {
+        "url": "qwegweg",
+        "created-at": "2015-07-31T15:00:45.094-07:00",
+        "updated-at": "2015-07-31T15:00:45.094-07:00"
+      },
+      "relationships": {
+        "room": {
+          "data": {
+            "type": "rooms",
+            "id": "70683"
+          }
+        }
+      }
+    }
+  ]
+}

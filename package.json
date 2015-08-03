@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "postinstall": "linklocal",
-    "test": "hihat __test__/state/*.js __test__/sdk/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
-    "test-ci": "zuul -- __test__/state/*.js __test__/sdk/*.js",
+    "test": "hihat __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
+    "test-ci": "zuul -- __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js",
     "lint": "lw lint src/ --cache .tmp/lint.json"
   },
   "dependencies": {

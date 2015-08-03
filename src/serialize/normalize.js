@@ -1,12 +1,12 @@
+import {reduce, map, merge} from 'lodash'
 import asArray from 'as-array';
-import merge from 'merge';
 
 import {camelCase, dashCase} from './format';
 
 function formatRelationshipData (resource, formatter = camelCase) {
 
   if (Array.isArray(resource.data)) {
-    resource.data = resource.data.map(data => {
+    resource.data = map(resource.data, data => {
 
       return {
         ...data,
@@ -23,18 +23,18 @@ function formatRelationshipData (resource, formatter = camelCase) {
 
 function formatRelationships (relationships, formatter = camelCase) {
 
-  return Object.keys(relationships).reduce((rels, typeName) => {
+  return reduce(relationships, (rels, value, typeName) => {
 
-    rels[formatter(typeName)] = formatRelationshipData(relationships[typeName], formatter);
+    rels[formatter(typeName)] = formatRelationshipData(value, formatter);
     return rels;
   }, {});
 }
 
 function formatAttributes (attributes, formatter = camelCase) {
 
-  return Object.keys(attributes).reduce((attrs, attrKey) => {
+  return reduce(attributes, (attrs, value, attrKey) => {
 
-    attrs[formatter(attrKey)] = attributes[attrKey];
+    attrs[formatter(attrKey)] = value;
     return attrs;
   }, {});
 }
@@ -45,7 +45,7 @@ function formatResources (included, formatter = camelCase) {
     return included;
   }
 
-  return included.reduce((result, resource) => {
+  return reduce(included, (result, resource) => {
 
     let type = formatter(resource.type);
 
@@ -97,7 +97,7 @@ function normalizeRequest (body, formatter = dashCase) {
   }
 
   return Array.isArray(body)
-    ? body.map(formatRequest)
+    ? map(body, formatRequest)
     : formatRequest(body);
 }
 

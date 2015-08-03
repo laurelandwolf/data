@@ -1,9 +1,8 @@
 import {
   isString,
   isObject,
-  isNumber,
   all,
-  each
+  forEach
 } from 'lodash';
 
 function querySerializer () {
@@ -13,9 +12,9 @@ function querySerializer () {
   function serialize (object, prefix) {
 
     let qs = [];
-    each(object, (value, key) => {
+    forEach(object, (value, key) => {
 
-      let paramKey = isNumber(key) ? '' : key;
+      let paramKey = typeof key === 'number' ? '' : key;
       let k = prefix ? `${prefix}[${paramKey}]` : key;
       let serialized =
         typeof value === 'object'

@@ -1,7 +1,5 @@
+import {merge, omit, pick} from 'lodash';
 import joinPath from 'join-path';
-import omit from 'lodash/object/omit';
-import pick from 'lodash/object/pick';
-import merge from 'merge';
 
 function request (spec = {}) {
 

@@ -1,7 +1,7 @@
 import * as actionCreators from './action-creators';
 import * as reducers from './reducers';
 
-import createStore from './utils/create-store';
+import createStore from './create-store';
 
 export default function (initialState = {}) {
 

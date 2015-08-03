@@ -1,3 +1,4 @@
+import {forEach} from 'lodash';
 import raf from 'raf';
 import Freezer from 'freezer-js';
 
@@ -10,7 +11,7 @@ export default function createStore (reducer, initialState = {}) {
 
   function notifySubscribers () {
 
-    subscribers.forEach(sub => sub());
+    forEach(subscribers, sub => sub());
     dispatchCharged = false;
   }
 

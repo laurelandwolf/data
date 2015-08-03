@@ -1,11 +1,12 @@
+import {reduce} from 'lodash';
 import isPromise from 'is-promise';
 
 export default function bindActions (actions, dispatch) {
 
-  return Object.keys(actions).reduce((boundActions, fnName) => {
+  return reduce(actions, (boundActions, fn, fnName) => {
 
     boundActions[fnName] = (...args) => {
-      let action = actions[fnName](...args);
+      let action = fn(...args);
 
       if (typeof action === 'function') {
         return action(dispatch);

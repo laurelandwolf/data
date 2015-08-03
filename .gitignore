@@ -2,3 +2,4 @@ spike
 node_modules
 npm-debug.*
 .tmp
+bundle.js

@@ -1,6 +1,6 @@
 import {namespace} from 'tessed';
 
-import {format} from 'lw-serialize/normalize';
+import normalize from 'lw-serialize/normalize';
 import singleResponseData from '../mock/single-response.json';
 
 let test = namespace('format');
@@ -9,7 +9,7 @@ test.request = test.namespace('request');
 
 test.response('format "included" items array to key indexed object', ({equal, pass, fail, deepEqual}) => {
 
-  let {included} = format(singleResponseData);
+  let {included} = normalize.response(singleResponseData);
 
   equal(Array.isArray(included), false, 'not an array');
   equal(included.rooms['70683'].type, 'rooms', 'indexed by id');
@@ -39,7 +39,7 @@ test.response('format "included" items array to key indexed object', ({equal, pa
 
 test.response('format "data"', ({equal}) => {
 
-  let {data} = format(singleResponseData);
+  let {data} = normalize.response(singleResponseData);
 
   equal(data.type, 'projectStuff', 'data type');
   equal(data.attributes.homeOwnership, 'home ownership', 'attributes keys');

@@ -1,6 +1,42 @@
 import camelCase from 'lodash/string/camelcase';
 
-function format ({data, included}, formatter = camelCase) {
+function formatRelationshipData (resource, formatter = camelCase) {
+
+  if (Array.isArray(resource.data)) {
+    resource.data = resource.data.map(data => {
+
+      return {
+        ...data,
+        type: formatter(data.type)
+      };
+    });
+  }
+  else if (typeof resource.data === 'object' && resource.data !== null) {
+    resource.data.type = formatter(resource.data.type);
+  }
+
+  return resource;
+}
+
+function formatRelationships (relationships, formatter = camelCase) {
+
+  return Object.keys(relationships).reduce((rels, typeName) => {
+
+    rels[formatter(typeName)] = formatRelationshipData(relationships[typeName]);
+    return rels;
+  }, {});
+}
+
+function formatAttributes (attributes, formatter = camelCase) {
+
+  return Object.keys(attributes).reduce((attrs, attrKey) => {
+
+    attrs[formatter(attrKey)] = attributes[attrKey];
+    return attrs;
+  }, {});
+}
+
+function response ({data, included}, formatter = camelCase) {
 
   if (included) {
 
@@ -30,42 +66,6 @@ function format ({data, included}, formatter = camelCase) {
   };
 }
 
-function formatAttributes (attributes, formatter = camelCase) {
-
-  return Object.keys(attributes).reduce((attrs, attrKey) => {
-
-    attrs[formatter(attrKey)] = attributes[attrKey];
-    return attrs;
-  }, {});
-}
-
-function formatRelationships (relationships, formatter = camelCase) {
-
-  return Object.keys(relationships).reduce((rels, typeName) => {
-
-    rels[formatter(typeName)] = formatRelationshipData(relationships[typeName]);
-    return rels;
-  }, {});
-}
-
-function formatRelationshipData (resource, formatter = camelCase) {
-
-  if (Array.isArray(resource.data)) {
-    resource.data = resource.data.map(data => {
-
-      return {
-        ...data,
-        type: formatter(data.type)
-      };
-    });
-  }
-  else if (typeof resource.data === 'object' && resource.data !== null) {
-    resource.data.type = formatter(resource.data.type);
-  }
-
-  return resource;
-}
-
 export default {
-  format
+  response
 };

@@ -1,4 +1,6 @@
 import camelCase from 'lodash/string/camelcase';
+import asArray from 'as-array';
+import merge from 'merge';
 
 function formatRelationshipData (resource, formatter = camelCase) {
 
@@ -22,7 +24,7 @@ function formatRelationships (relationships, formatter = camelCase) {
 
   return Object.keys(relationships).reduce((rels, typeName) => {
 
-    rels[formatter(typeName)] = formatRelationshipData(relationships[typeName]);
+    rels[formatter(typeName)] = formatRelationshipData(relationships[typeName], formatter);
     return rels;
   }, {});
 }
@@ -36,33 +38,36 @@ function formatAttributes (attributes, formatter = camelCase) {
   }, {});
 }
 
-function response ({data, included}, formatter = camelCase) {
+function formatResources (included, formatter = camelCase) {
 
-  if (included) {
-
-    included = included.reduce((result, resource) => {
-
-      let type = formatter(resource.type);
-
-      resource.type = formatter(resource.type);
-      resource.attributes = formatAttributes(resource.attributes);
-      resource.relationships = formatRelationships(resource.relationships);
-
-      result[type] = result[type] || {};
-      result[type][resource.id] = resource;
-
-      return result;
-    }, {});
+  if (!included) {
+    return included;
   }
 
+  return included.reduce((result, resource) => {
+
+    let type = formatter(resource.type);
+
+    result[type] = {
+      ...result[type],
+
+      [resource.id]: {
+        ...resource,
+        type: formatter(resource.type),
+        attributes: formatAttributes(resource.attributes, formatter),
+        relationships: formatRelationships(resource.relationships, formatter)
+      }
+    };
+
+    return result;
+  }, {});
+}
+
+function response ({data, included}, formatter = camelCase) {
+
   return {
-    data: {
-      ...data,
-      type: formatter(data.type),
-      attributes: formatAttributes(data.attributes),
-      relationships: formatRelationships(data.relationships)
-    },
-    included
+    ...formatResources(included),
+    ...formatResources(asArray(data))
   };
 }
 

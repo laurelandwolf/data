@@ -1,84 +1,86 @@
 {
-  "data": {
-    "id": "31944",
-    "type": "project-stuff",
-    "attributes": {
-      "title": "Scott Corgan's Living Room and Master Bedroom",
-      "style": "modern",
-      "package": "light",
-      "location": "",
-      "timeline": null,
-      "timeline-other": null,
-      "other-details": null,
-      "state": "launched",
-      "submission-state": "closed",
-      "revision-state": "open",
-      "household-size": null,
-      "reason": [],
-      "reason-other": null,
-      "home-ownership": "home ownership",
-      "home-ownership-other": null,
-      "access": null,
-      "access-other": null,
-      "moving-details": null,
-      "pets": null,
-      "children": null,
-      "preferred-stores": null,
-      "rejected-stores": null,
-      "created-at": "2015-07-31T11:05:01.745-07:00",
-      "updated-at": "2015-07-31T15:00:34.144-07:00"
-    },
-    "relationships": {
-      "submission-room": {
-        "data": {
-          "type": "rooms",
-          "id": "70683"
-        }
+  "data": [
+    {
+      "id": "31944",
+      "type": "project-stuff",
+      "attributes": {
+        "title": "Scott Corgan's Living Room and Master Bedroom",
+        "style": "modern",
+        "package": "light",
+        "location": "",
+        "timeline": null,
+        "timeline-other": null,
+        "other-details": null,
+        "state": "launched",
+        "submission-state": "closed",
+        "revision-state": "open",
+        "household-size": null,
+        "reason": [],
+        "reason-other": null,
+        "home-ownership": "home ownership",
+        "home-ownership-other": null,
+        "access": null,
+        "access-other": null,
+        "moving-details": null,
+        "pets": null,
+        "children": null,
+        "preferred-stores": null,
+        "rejected-stores": null,
+        "created-at": "2015-07-31T11:05:01.745-07:00",
+        "updated-at": "2015-07-31T15:00:34.144-07:00"
       },
-      "design-package": {
-        "data": {
-          "type": "design-package",
-          "id": "1"
-        }
-      },
-      "winner": {
-        "data": [
-          {
-            "type": "the-winner",
-            "id": "387"
-          },
-          {
-            "type": "the-winner",
-            "id": "388"
-          }
-        ]
-      },
-      "logo": {
-        "data": null
-      },
-      "rooms": {
-        "data": [
-          {
-            "type": "rooms",
-            "id": "70684"
-          },
-          {
+      "relationships": {
+        "submission-room": {
+          "data": {
             "type": "rooms",
             "id": "70683"
           }
-        ]
-      },
-      "comments": {
-        "data": []
-      },
-      "floor-plans": {
-        "data": []
-      },
-      "submissions": {
-        "data": []
+        },
+        "design-package": {
+          "data": {
+            "type": "design-package",
+            "id": 1
+          }
+        },
+        "winner": {
+          "data": [
+            {
+              "type": "the-winner",
+              "id": "387"
+            },
+            {
+              "type": "the-winner",
+              "id": "388"
+            }
+          ]
+        },
+        "logo": {
+          "data": null
+        },
+        "rooms": {
+          "data": [
+            {
+              "type": "rooms",
+              "id": "70684"
+            },
+            {
+              "type": "rooms",
+              "id": "70683"
+            }
+          ]
+        },
+        "comments": {
+          "data": []
+        },
+        "floor-plans": {
+          "data": []
+        },
+        "submissions": {
+          "data": []
+        }
       }
     }
-  },
+  ],
   "included": [
     {
       "id": "70683",

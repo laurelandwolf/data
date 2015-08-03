@@ -1,58 +1,45 @@
 import {namespace} from 'tessed';
 
 import normalize from 'lw-serialize/normalize';
-import singleResponseData from '../mock/single-response.json';
+import multiResponseData from '../mock/multi-response.json';
 
 let test = namespace('format');
 test.response = test.namespace('response');
 test.request = test.namespace('request');
 
-test.response('format "included" items array to key indexed object', ({equal, pass, fail, deepEqual}) => {
+test.response('normalize and format response body', ({deepEqual, equal}) => {
 
-  let {included} = normalize.response(singleResponseData);
-
-  equal(Array.isArray(included), false, 'not an array');
-  equal(included.rooms['70683'].type, 'rooms', 'indexed by id');
-  equal(included.inspirationLinks['9'].type, 'inspirationLinks', 'camel case all the types');
-
-  included.rooms['70683'].relationships.inspirationLinks !== undefined
-    ? pass('camel case relationship type keys')
-    : fail('camel case relationship type keys');
-
-  equal(
-    included.rooms['70683'].relationships.inspirationLinks.data[0].type,
-    'inspirationLinks',
-    'relationships data type as array'
-  );
-  equal(
-    included.rooms['70683'].relationships.somethingElse.data.type,
-    'somethingElse',
-    'relationships data type as object'
-  );
+  let response = normalize.response(multiResponseData);
 
   deepEqual(
-    included.rooms['70683'].attributes.roomFeels,
-    ['cozy', 'formal'],
-    'attribute keys'
+    Object.keys(response),
+    ['rooms', 'inspirationLinks', 'projectStuff'],
+    'top level types as keys'
   );
-});
 
-test.response('format "data"', ({equal}) => {
-
-  let {data} = normalize.response(singleResponseData);
-
-  equal(data.type, 'projectStuff', 'data type');
-  equal(data.attributes.homeOwnership, 'home ownership', 'attributes keys');
+  equal(response.inspirationLinks['9'].id, '9', 'keeps id in resource');
+  deepEqual(Object.keys(response.inspirationLinks), ['9', '10'], 'index by id');
+  equal(response.inspirationLinks['9'].type, 'inspirationLinks', 'formatted type');
 
   equal(
-    data.relationships.designPackage.data.type,
+    response.inspirationLinks['9'].attributes.createdAt,
+    '2015-07-31T15:00:43.362-07:00',
+    'formatted attribute keys'
+  );
+
+  equal(
+    response.projectStuff['31944'].relationships.designPackage.data.id,
+    1,
+    'formatted relationship keys'
+  );
+  equal(
+    response.projectStuff['31944'].relationships.designPackage.data.type,
     'designPackage',
-    'relationships data type as object'
+    'formatted relationship type from object'
   );
-
   equal(
-    data.relationships.winner.data[0].type,
+    response.projectStuff['31944'].relationships.winner.data[1].type,
     'theWinner',
-    'relationships data type as array'
+    'formatted relationship type from array'
   );
 });

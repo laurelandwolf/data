@@ -1,6 +1,7 @@
-import camelCase from 'lodash/string/camelcase';
 import asArray from 'as-array';
 import merge from 'merge';
+
+import {camelCase} from './format';
 
 function formatRelationshipData (resource, formatter = camelCase) {
 

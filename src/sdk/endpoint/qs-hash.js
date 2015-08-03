@@ -5,7 +5,7 @@ import _, {
 } from 'lodash';
 import asArray from 'as-array';
 
-import {snakeCase} from 'lw-serialize/format';
+import {dashCase} from 'lw-serialize/format';
 
 function qshash () {
 
@@ -20,7 +20,7 @@ function qshash () {
         if (typeof field === 'string') {
           let [rel, name] = field.split('.');
           field = {
-            [snakeCase(rel)]: snakeCase(name)
+            [dashCase(rel)]: dashCase(name)
           };
         }
 
@@ -30,8 +30,8 @@ function qshash () {
 
         forEach(fieldsMap, (val, key) => {
 
-          let name = snakeCase(key);
-          let values = map(asArray(val), snakeCase);
+          let name = dashCase(key);
+          let values = map(asArray(val), dashCase);
 
           fields[name] = union(fields[name], values);
         });

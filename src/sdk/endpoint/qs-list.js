@@ -4,7 +4,7 @@ import _, {
   isObject
 } from 'lodash';
 
-import {snakeCase} from 'lw-serialize/format';
+import {dashCase} from 'lw-serialize/format';
 
 function qslist (name) {
 
@@ -18,7 +18,7 @@ function qslist (name) {
 
         // i.e. rooms.inspirationLinks
         if (isString(item)) {
-          return map(item.split('.'), snakeCase).join('.');
+          return map(item.split('.'), dashCase).join('.');
         }
 
         // i.e. - {rooms: ['inspirationLinks']}
@@ -34,7 +34,7 @@ function qslist (name) {
               includesWithOptions.push(val);
             }
 
-            return `${snakeCase(field)}.${snakeCase(type)}`;
+            return `${dashCase(field)}.${dashCase(type)}`;
           });
         });
       })
@@ -52,7 +52,7 @@ function qslist (name) {
 
     stringify () {
 
-      return `${snakeCase(name)}=${list.join(',')}`;
+      return `${dashCase(name)}=${list.join(',')}`;
     },
 
     count () {

@@ -1,7 +1,7 @@
 import asArray from 'as-array';
 import merge from 'merge';
 
-import {camelCase} from './format';
+import {camelCase, dashCase} from './format';
 
 function formatRelationshipData (resource, formatter = camelCase) {
 
@@ -64,14 +64,44 @@ function formatResources (included, formatter = camelCase) {
   }, {});
 }
 
-function response ({data, included}, formatter = camelCase) {
+function formatResourceRequest (data, formatter = dashCase) {
+
+  if (!data) {
+    return data;
+  }
 
   return {
-    ...formatResources(included),
-    ...formatResources(asArray(data))
+    ...data,
+    type: formatter(data.type),
+    attributes: formatAttributes(data.attributes, formatter),
+    relationships: formatRelationships(data.relationships, formatter)
+  }
+}
+
+function normalizeResponse ({data, included}, formatter = camelCase) {
+
+  return {
+    ...formatResources(included, formatter),
+    ...formatResources(asArray(data), formatter)
   };
 }
 
+function normalizeRequest (body, formatter = dashCase) {
+
+  function formatRequest (body) {
+
+    return {
+      ...body,
+      data: formatResourceRequest(body.data, formatter)
+    };
+  }
+
+  return Array.isArray(body)
+    ? body.map(formatRequest)
+    : formatRequest(body);
+}
+
 export default {
-  response
+  response: normalizeResponse,
+  request: normalizeRequest
 };

@@ -1,7 +1,4 @@
-import camelCase from 'lodash/string/camelcase';
-import kebabCase from 'lodash/string/kebabCase';
-import trimLeft from 'lodash/string/trimleft';
-import startsWith from 'lodash/string/startswith';
+import {camelCase, kebabCase, trimLeft, startsWith} from 'lodash';
 
 function startsWithDash (str) {
 

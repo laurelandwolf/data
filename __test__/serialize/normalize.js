@@ -2,12 +2,13 @@ import {namespace} from 'tessed';
 
 import normalize from 'lw-serialize/normalize';
 import multiResponseData from '../mock/multi-response.json';
+import requestData from '../mock/request.json';
 
 let test = namespace('format');
 test.response = test.namespace('response');
 test.request = test.namespace('request');
 
-test.response('normalize and format response body', ({deepEqual, equal}) => {
+test.response('normalize and format body', ({deepEqual, equal}) => {
 
   let response = normalize.response(multiResponseData);
 
@@ -42,4 +43,33 @@ test.response('normalize and format response body', ({deepEqual, equal}) => {
     'theWinner',
     'formatted relationship type from array'
   );
+});
+
+test.request('format body for single item', ({equal, deepEqual}) => {
+
+  let body = normalize.request(requestData);
+
+  equal(body.data.type, 'photo-things', 'body type');
+  equal(body.data.attributes['url-src'], 'http://test.com', 'attribute keys');
+  deepEqual(body.data.relationships['photo-person'], {
+    data: {
+      id: '9',
+      type: 'another-thing'
+    }
+  }, 'relationship keys and relationship data type');
+});
+
+test.request('format body for multiple items', ({equal, deepEqual}) => {
+
+  let body = normalize.request([requestData, requestData]);
+
+  equal(body.length, 2, 'both items');
+  equal(body[0].data.type, 'photo-things', 'body type');
+  equal(body[0].data.attributes['url-src'], 'http://test.com', 'attribute keys');
+  deepEqual(body[0].data.relationships['photo-person'], {
+    data: {
+      id: '9',
+      type: 'another-thing'
+    }
+  }, 'relationship keys and relationship data type');
 });

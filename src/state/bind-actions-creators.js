@@ -2,9 +2,7 @@ import isPromise from 'is-promise';
 
 export default function bindActions (actions, dispatch) {
 
-  let boundActions = {};
-
-  Object.keys(actions).forEach(fnName => {
+  return Object.keys(actions).reduce((boundActions, fnName) => {
 
     boundActions[fnName] = (...args) => {
       let action = actions[fnName](...args);
@@ -18,7 +16,7 @@ export default function bindActions (actions, dispatch) {
 
       return dispatch(action);
     };
-  });
 
-  return boundActions;
+    return boundActions;
+  }, {});
 }

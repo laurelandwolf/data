@@ -1,15 +1,15 @@
 import {namespace} from 'tessed';
 
-import normalize from 'lw-serialize/normalize';
+import {format} from 'lw-serialize/normalize';
 import singleResponseData from '../mock/single-response.json';
 
-let test = namespace('normalize');
+let test = namespace('format');
 test.response = test.namespace('response');
 test.request = test.namespace('request');
 
-test.response('normalize "included" items array to key indexed object', ({equal, pass, fail, deepEqual}) => {
+test.response('format "included" items array to key indexed object', ({equal, pass, fail, deepEqual}) => {
 
-  let {included} = normalize.response(singleResponseData);
+  let {included} = format(singleResponseData);
 
   equal(Array.isArray(included), false, 'not an array');
   equal(included.rooms['70683'].type, 'rooms', 'indexed by id');
@@ -37,8 +37,22 @@ test.response('normalize "included" items array to key indexed object', ({equal,
   );
 });
 
-test.response('normalize "data"', () => {
+test.response('format "data"', ({equal}) => {
 
-  let {data} = normalize.response(singleResponseData);
-  console.log(data);
+  let {data} = format(singleResponseData);
+
+  equal(data.type, 'projectStuff', 'data type');
+  equal(data.attributes.homeOwnership, 'home ownership', 'attributes keys');
+
+  equal(
+    data.relationships.designPackage.data.type,
+    'designPackage',
+    'relationships data type as object'
+  );
+
+  equal(
+    data.relationships.winner.data[0].type,
+    'theWinner',
+    'relationships data type as array'
+  );
 });

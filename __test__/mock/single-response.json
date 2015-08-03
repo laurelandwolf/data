@@ -1,7 +1,7 @@
 {
   "data": {
     "id": "31944",
-    "type": "projects",
+    "type": "project-stuff",
     "attributes": {
       "title": "Scott Corgan's Living Room and Master Bedroom",
       "style": "modern",
@@ -16,7 +16,7 @@
       "household-size": null,
       "reason": [],
       "reason-other": null,
-      "home-ownership": null,
+      "home-ownership": "home ownership",
       "home-ownership-other": null,
       "access": null,
       "access-other": null,
@@ -36,13 +36,22 @@
         }
       },
       "design-package": {
-        "data": null
+        "data": {
+          "type": "design-package",
+          "id": 1
+        }
       },
       "winner": {
-        "data": {
-          "type": "designers",
-          "id": "387"
-        }
+        "data": [
+          {
+            "type": "the-winner",
+            "id": "387"
+          },
+          {
+            "type": "the-winner",
+            "id": "388"
+          }
+        ]
       },
       "logo": {
         "data": null

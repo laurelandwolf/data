@@ -1,18 +1,16 @@
-// NOTE: see https://github.com/gaearon/normalizr
-
 import camelCase from 'lodash/string/camelcase';
 
-function normalizeResponse ({data, included}) {
+function format ({data, included}, formatter = camelCase) {
 
   if (included) {
 
     included = included.reduce((result, resource) => {
 
-      let type = camelCase(resource.type);
+      let type = formatter(resource.type);
 
-      resource.type = camelCase(resource.type);
-      resource.attributes = normalizeAttributes(resource.attributes);
-      resource.relationships = normalizeRelationships(resource.relationships);
+      resource.type = formatter(resource.type);
+      resource.attributes = formatAttributes(resource.attributes);
+      resource.relationships = formatRelationships(resource.relationships);
 
       result[type] = result[type] || {};
       result[type][resource.id] = resource;
@@ -22,45 +20,52 @@ function normalizeResponse ({data, included}) {
   }
 
   return {
-    data,
+    data: {
+      ...data,
+      type: formatter(data.type),
+      attributes: formatAttributes(data.attributes),
+      relationships: formatRelationships(data.relationships)
+    },
     included
   };
 }
 
-function normalizeAttributes (attributes) {
+function formatAttributes (attributes, formatter = camelCase) {
 
   return Object.keys(attributes).reduce((attrs, attrKey) => {
 
-    attrs[camelCase(attrKey)] = attributes[attrKey];
+    attrs[formatter(attrKey)] = attributes[attrKey];
     return attrs;
   }, {});
 }
 
-function normalizeRelationships (relationships) {
+function formatRelationships (relationships, formatter = camelCase) {
 
   return Object.keys(relationships).reduce((rels, typeName) => {
 
-    rels[camelCase(typeName)] = normalizeRelationshipData(relationships[typeName]);
+    rels[formatter(typeName)] = formatRelationshipData(relationships[typeName]);
     return rels;
   }, {});
 }
 
-function normalizeRelationshipData (resource) {
+function formatRelationshipData (resource, formatter = camelCase) {
 
   if (Array.isArray(resource.data)) {
     resource.data = resource.data.map(data => {
 
-      data.type = camelCase(data.type);
-      return data;
+      return {
+        ...data,
+        type: formatter(data.type)
+      };
     });
   }
   else if (typeof resource.data === 'object' && resource.data !== null) {
-    resource.data.type = camelCase(resource.data.type);
+    resource.data.type = formatter(resource.data.type);
   }
 
   return resource;
 }
 
 export default {
-  response: normalizeResponse
+  format
 };

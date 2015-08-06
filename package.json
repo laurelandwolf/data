@@ -17,9 +17,9 @@
     "is-promise": "^2.0.0",
     "join-path": "^1.0.1",
     "lodash": "^3.10.0",
-    "lw-sdk": "./src/sdk",
-    "lw-serialize": "./src/serialize",
-    "lw-state": "./src/state",
+    "lw-sdk": "src/sdk",
+    "lw-serialize": "src/serialize",
+    "lw-state": "src/state",
     "pluralize": "^1.1.2",
     "raf": "^3.1.0",
     "reselect": "0.0.2"

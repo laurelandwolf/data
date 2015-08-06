@@ -1,5 +1,5 @@
-import sdk from 'lw-sdk';
-import serialize from 'lw-serialize';
+import sdk from './sdk';
+import serialize from './serialize';
 
 export default {
   sdk,

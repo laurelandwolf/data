@@ -7,7 +7,7 @@
     "test": "hihat __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
     "test-ci": "zuul -- __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js",
     "lint": "lw lint src/ --cache .tmp/lint.json",
-    "bundle": "NODE_ENV=production linklocal && browserify -t [babelify --stage 0] src/index.js -p [ minifyify --no-map ] > bundle.js"
+    "bundle": "NODE_ENV=production browserify -t [babelify --stage 0] src/index.js -p [ minifyify --no-map ] > bundle.js"
   },
   "dependencies": {
     "as-array": "^1.0.0",
@@ -16,9 +16,6 @@
     "is-promise": "^2.0.0",
     "join-path": "^1.0.1",
     "lodash": "^3.10.0",
-    "lw-sdk": "src/sdk",
-    "lw-serialize": "src/serialize",
-    "lw-state": "src/state",
     "pluralize": "^1.1.2",
     "raf": "^3.1.0",
     "reselect": "0.0.2"
@@ -28,7 +25,6 @@
     "browserify": "^11.0.1",
     "es6-promise": "^2.3.0",
     "hihat": "^2.4.1",
-    "linklocal": "^2.5.2",
     "lw-build": "github:laurelandwolf/build",
     "minifyify": "^7.0.3",
     "mock-fetch": "^1.0.0",

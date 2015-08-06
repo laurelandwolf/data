@@ -110,6 +110,12 @@ function endpoint ({uri = '/', method = 'GET', payload} = {}, apiConfig) {
       relationships = merge(relationships, rels);
       return promise;
     };
+
+    promise.include = (...args) => {
+
+      includes.push(...args);
+      return promise;
+    };
   }
 
   return promise;

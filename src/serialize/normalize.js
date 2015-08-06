@@ -1,4 +1,4 @@
-import {reduce, map, merge} from 'lodash'
+import {reduce, map} from 'lodash';
 import asArray from 'as-array';
 
 import {camelCase, dashCase} from './format';
@@ -75,18 +75,18 @@ function formatResourceRequest (data, formatter = dashCase) {
     type: formatter(data.type),
     attributes: formatAttributes(data.attributes, formatter),
     relationships: formatRelationships(data.relationships, formatter)
-  }
+  };
 }
 
 function normalizeResponse ({data, included}, formatter = camelCase) {
 
   return {
-    ...formatResources(included, formatter),
-    ...formatResources(asArray(data), formatter)
+    ...formatResources(asArray(data), formatter),
+    ...formatResources(included, formatter)
   };
 }
 
-function normalizeRequest (body, formatter = dashCase) {
+function normalizeRequest (data, formatter = dashCase) {
 
   function formatRequest (body) {
 
@@ -96,9 +96,9 @@ function normalizeRequest (body, formatter = dashCase) {
     };
   }
 
-  return Array.isArray(body)
-    ? map(body, formatRequest)
-    : formatRequest(body);
+  return Array.isArray(data)
+    ? map(data, formatRequest)
+    : formatRequest(data);
 }
 
 export default {

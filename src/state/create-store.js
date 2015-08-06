@@ -1,11 +1,11 @@
-import {forEach} from 'lodash';
+import {forEach, without} from 'lodash';
 import raf from 'raf';
-import Freezer from 'freezer-js';
+import Immutable from 'immutable';
 
 // TODO: handle passing in multiple reducers
 export default function createStore (reducer, initialState = {}) {
 
-  let currentState = new Freezer(initialState);
+  let currentState = Immutable.fromJS(initialState);
   let subscribers = [];
   let dispatchCharged = false;
 
@@ -17,34 +17,35 @@ export default function createStore (reducer, initialState = {}) {
 
   function getState () {
 
-    return currentState.get();
+    return currentState;
   }
 
   function replaceState (nextState) {
 
-    currentState.get().reset(nextState);
+    let oldState = currentState;
+    currentState = Immutable.fromJS(nextState);
+
+    if (!oldState.equals(currentState) && !dispatchCharged) {
+      dispatchCharged = true;
+      raf(notifySubscribers);
+    }
   }
 
   return {
     getState,
     subscribe (fn) {
 
-      subscribers.push(fn);
+      subscribers = subscribers.concat(fn);
 
       return function unsubscribe () {
 
-        let idx = subscribers.indexOf(fn);
-        subscribers.splice(idx, 1);
+        subscribers = without(subscribers, fn);
       };
     },
     dispatch (action) {
 
-      if (!dispatchCharged) {
-        dispatchCharged = true;
-        raf(notifySubscribers);
-      }
-
-      replaceState(reducer(getState(), action));
+      let nextState = reducer(getState(), action);
+      replaceState(nextState);
     }
   };
 }

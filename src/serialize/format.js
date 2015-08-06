@@ -26,4 +26,4 @@ function dashCase (data) {
 export default {
   camelCase,
   dashCase
-}
+};

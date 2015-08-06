@@ -6,6 +6,7 @@ export default function bindActions (actions, dispatch) {
   return reduce(actions, (boundActions, fn, fnName) => {
 
     boundActions[fnName] = (...args) => {
+
       let action = fn(...args);
 
       if (typeof action === 'function') {

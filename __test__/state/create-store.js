@@ -1,4 +1,4 @@
-import Freezer from 'freezer-js';
+import Immutable from 'immutable';
 
 import {namespace} from 'tessed';
 import createStore from 'lw-state/create-store';
@@ -23,13 +23,13 @@ test('store state', ({deepEqual, equal, context}) => {
   let store = createStore(context.reducer, initialState);
   let called = 0;
 
-  deepEqual(store.getState(), initialState, 'got the state');
+  deepEqual(store.getState().toJS(), initialState, 'got the state');
 
   initialState.foo = 'baz';
-  deepEqual(store.getState(), {foo: 'bar'}, 'clones the state');
+  deepEqual(store.getState().toJS(), {foo: 'bar'}, 'clones the state');
 
   store.dispatch({});
-  deepEqual(store.getState(), {state: 'new'}, 'sets state from reducers');
+  deepEqual(store.getState().toJS(), {state: 'new'}, 'sets state from reducers');
 });
 
 test('subscribe to store', ({deepEqual, context}) => {
@@ -45,7 +45,7 @@ test('subscribe to store', ({deepEqual, context}) => {
 
     store.subscribe(() => {
 
-      deepEqual(store.getState(), {state: 'new'}, 'sets state from reducers');
+      deepEqual(store.getState().toJS(), {state: 'new'}, 'sets state from reducers');
       end();
     });
   };
@@ -75,7 +75,7 @@ test('argument order in reducers', ({equal, deepEqual}) => {
 
     called = true;
 
-    deepEqual(state, {foo: 'bar'}, 'state passed as 1st argument');
+    deepEqual(state.toJS(), {foo: 'bar'}, 'state passed as 1st argument');
     deepEqual(action, {type: 'test'}, 'action passed as 2nd argument');
   }
 
@@ -123,24 +123,19 @@ test.skip('multiple reducers', () => {
 test('immutable data', ({context, equal, notEqual}) => {
 
   function immutableTestReducer (state, action) {
+
     switch(action.type) {
       default:
-        return {
-          ...state,
-          foo: {
-            bar: 'baz'
-          }
-        };
+        return state.set(
+          'foo',
+          Immutable.fromJS({bar: 'bez'})
+        );
     }
   }
 
   let initialState = {
-    foo: {
-      bar: 'baz'
-    },
-    test: {
-      me: 'now'
-    }
+    foo: {bar: 'baz'},
+    test: {me: 'now'}
   };
   let store = createStore(immutableTestReducer, initialState);
   let immutableState = store.getState();
@@ -152,8 +147,8 @@ test('immutable data', ({context, equal, notEqual}) => {
     store.subscribe(() => {
 
       // Shallow equal comparison proves that the reference is the same
-      equal(store.getState().test, immutableState.test, 'only updated reference on changed tree');
-      notEqual(store.getState().foo, immutableState.foo, 'new tree created for state updated');
+      equal(store.getState().get('test'), immutableState.get('test'), 'only updated reference on changed tree');
+      notEqual(store.getState().get('foo'), immutableState.get('foo'), 'new tree created for state updated');
       end();
     });
   };

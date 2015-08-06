@@ -12,16 +12,17 @@
   },
   "dependencies": {
     "as-array": "^1.0.0",
-    "freezer-js": "^0.5.2",
+    "immutable": "^3.7.4",
     "is-number": "^2.0.2",
     "is-promise": "^2.0.0",
     "join-path": "^1.0.1",
     "lodash": "^3.10.0",
-    "lw-sdk": "file:./src/sdk",
-    "lw-serialize": "file:./src/serialize",
-    "lw-state": "file:./src/state",
+    "lw-sdk": "./src/sdk",
+    "lw-serialize": "./src/serialize",
+    "lw-state": "./src/state",
     "pluralize": "^1.1.2",
-    "raf": "^3.1.0"
+    "raf": "^3.1.0",
+    "reselect": "0.0.2"
   },
   "devDependencies": {
     "babelify": "^6.1.3",

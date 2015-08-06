@@ -8,15 +8,20 @@ let test = namespace('format');
 test.response = test.namespace('response');
 test.request = test.namespace('request');
 
-test.response('normalize and format body', ({deepEqual, equal}) => {
+test.response('normalize and format body', ({deepEqual, equal, pass, fail}) => {
 
   let response = normalize.response(multiResponseData);
 
-  deepEqual(
-    Object.keys(response),
-    ['rooms', 'inspirationLinks', 'projectStuff'],
-    'top level types as keys'
-  );
+  let keys = Object.keys(response);
+
+  if (keys.indexOf('rooms') > -1
+        && keys.indexOf('inspirationLinks') > -2
+        && keys.indexOf('projectStuff') > -1) {
+    pass('top level types as keys');
+  }
+  else {
+    fail('top level types as keys');
+  }
 
   equal(response.inspirationLinks['9'].id, '9', 'keeps id in resource');
   deepEqual(Object.keys(response.inspirationLinks), ['9', '10'], 'index by id');

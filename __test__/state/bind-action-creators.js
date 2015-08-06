@@ -1,6 +1,7 @@
 import {namespace} from 'tessed';
 import bindActionsCreators from 'lw-state/bind-actions-creators';
 import createStore from 'lw-state/create-store';
+import Immutable from 'immutable';
 
 let test = namespace('bindActionsCreators');
 
@@ -12,10 +13,7 @@ test.beforeEach(() => {
 
     switch (action.type) {
       default:
-        return {
-          ...state,
-          foo: action.foo
-        };
+        return state.set('foo', Immutable.fromJS(action.foo));
     }
   }
   let store = createStore(testReducer);
@@ -43,7 +41,7 @@ test('dispatches on action execution', ({deepEqual, context}) => {
 
     store.subscribe(() => {
 
-      deepEqual(store.getState(), {foo: 'bar'}, 'action fired');
+      deepEqual(store.getState().toJS(), {foo: 'bar'}, 'action fired');
       end();
     });
   };
@@ -70,7 +68,7 @@ test('action returns a thunk', ({context, deepEqual}) => {
 
     store.subscribe(() => {
 
-      deepEqual(store.getState(), {foo: 'bar'}, 'action fired');
+      deepEqual(store.getState().toJS(), {foo: 'bar'}, 'action fired');
       end();
     });
   };
@@ -97,7 +95,7 @@ test('action returns a promise', ({context, deepEqual}) => {
 
     store.subscribe(() => {
 
-      deepEqual(store.getState(), {foo: 'bar'}, 'action fired');
+      deepEqual(store.getState().toJS(), {foo: 'bar'}, 'action fired');
       end();
     });
   };

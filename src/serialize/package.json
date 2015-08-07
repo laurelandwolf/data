@@ -1,4 +1,14 @@
 {
   "name": "lw-serialize",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "stage": "0"
+        }
+      ]
+    ]
+  }
 }

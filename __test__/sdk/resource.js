@@ -1,7 +1,7 @@
 import mockFetch from 'mock-fetch';
 import {namespace} from 'tessed';
 
-import resource from 'lw-sdk/resource';
+import resource from '../../src/sdk/resource';
 
 let test = namespace('resource');
 test.getAll = test.namespace('get all');

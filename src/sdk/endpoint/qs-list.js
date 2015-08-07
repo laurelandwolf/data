@@ -4,7 +4,7 @@ import _, {
   isObject
 } from 'lodash';
 
-import {dashCase} from 'lw-serialize/format';
+import {dashCase} from '../../serialize/format';
 
 function qslist (name) {
 

@@ -1,13 +1,13 @@
 {
   "name": "lw-data",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Data",
   "main": "src/index.js",
   "scripts": {
     "test": "hihat __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
     "test-ci": "zuul -- __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js",
     "lint": "lw lint src/ --cache .tmp/lint.json",
-    "bundle": "NODE_ENV=production browserify -t [babelify --stage 0] src/index.js -p [ minifyify --no-map ] > bundle.js"
+    "bundle": "NODE_ENV=production browserify -t [babelify --stage 0] src/index.js > bundle.js"
   },
   "dependencies": {
     "as-array": "^1.0.0",

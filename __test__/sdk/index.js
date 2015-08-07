@@ -1,7 +1,7 @@
 import {namespace} from 'tessed';
 import mockFetch from 'mock-fetch';
 
-import sdk from 'lw-sdk';
+import sdk from '../../src/sdk';
 
 let test = namespace('sdk');
 

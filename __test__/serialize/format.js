@@ -1,5 +1,6 @@
 import {namespace} from 'tessed';
-import format from 'lw-serialize/format';
+
+import format from '../../src/serialize/format';
 
 let test = namespace('format');
 

@@ -5,7 +5,7 @@ import _, {
 } from 'lodash';
 import asArray from 'as-array';
 
-import {dashCase} from 'lw-serialize/format';
+import {dashCase} from '../../serialize/format';
 
 function qshash () {
 

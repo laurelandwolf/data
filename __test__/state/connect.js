@@ -1,8 +1,8 @@
 import {namespace} from 'tessed';
 import React from 'react';
 
-import connect from 'lw-state/connect';
-import createStore from 'lw-state/create-store';
+import connect from '../../src/state/connect';
+import createStore from '../../src/state/create-store';
 
 let test = namespace('connect');
 

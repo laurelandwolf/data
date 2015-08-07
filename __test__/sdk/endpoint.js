@@ -1,7 +1,7 @@
 import mockFetch from 'mock-fetch';
 import {namespace} from 'tessed';
 
-import endpoint from 'lw-sdk/endpoint';
+import endpoint from '../../src/sdk/endpoint';
 import circularRefsData from '../mock/circular-refs.json';
 
 let test = namespace('endpoint');

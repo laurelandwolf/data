@@ -3,8 +3,8 @@ import mockFetch from 'mock-fetch';
 import {capitalize, camelCase} from 'lodash';
 import pluralize from 'pluralize';
 
-import api from 'lw-sdk/api';
-import r from 'lw-sdk/resource';
+import api from '../../src/sdk/api';
+import r from '../../src/sdk/resource';
 
 let test = namespace('api');
 

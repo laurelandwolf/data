@@ -1,6 +1,6 @@
 import {namespace} from 'tessed';
 
-import normalize from 'lw-serialize/normalize';
+import normalize from '../../src/serialize/normalize';
 import multiResponseData from '../mock/multi-response.json';
 import requestData from '../mock/request.json';
 

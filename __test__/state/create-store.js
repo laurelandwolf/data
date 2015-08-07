@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
-
 import {namespace} from 'tessed';
-import createStore from 'lw-state/create-store';
+
+import createStore from '../../src/state/create-store';
 
 let test = namespace('createStore');
 

@@ -1,6 +1,7 @@
 import {namespace} from 'tessed';
 import mockFetch from 'mock-fetch';
-import request from 'lw-sdk/request';
+
+import request from '../../src/sdk/request';
 
 const ORIGIN = 'https://api.laurelandwolf.com/v1.0';
 let test = namespace('request');

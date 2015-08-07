@@ -1,7 +1,8 @@
 import {namespace} from 'tessed';
-import bindActionsCreators from 'lw-state/bind-actions-creators';
-import createStore from 'lw-state/create-store';
 import Immutable from 'immutable';
+
+import bindActionsCreators from '../../src/state/bind-actions-creators';
+import createStore from '../../src/state/create-store';
 
 let test = namespace('bindActionsCreators');
 

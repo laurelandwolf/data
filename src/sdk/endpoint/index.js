@@ -1,5 +1,4 @@
-import isEmpty from 'lodash/lang/isempty';
-import {merge} from 'lodash';
+import {merge, isEmpty} from 'lodash';
 import raf from 'raf';
 
 import request from '../request';

@@ -14,8 +14,8 @@ function connect (store) {
       return function (Component) {
 
         return Component;
-      }
-    }
+      };
+    };
   }
 }
 

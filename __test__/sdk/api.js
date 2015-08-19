@@ -7,6 +7,8 @@ import api from '../../src/sdk/api';
 import r from '../../src/sdk/resource';
 
 let test = namespace('api');
+test.beforeEach(() => mockFetch.mock());
+test.afterEach(() => mockFetch.restore());
 
 let resources = [
   'projects',
@@ -26,7 +28,10 @@ let resources = [
   'portfolio-images',
   'media',
   'shopping-list-items',
-  'users'
+  'users',
+  'shoppingCarts',
+  'shoppingCartItems',
+  'charges'
 ];
 
 let singletonResources = [
@@ -34,8 +39,6 @@ let singletonResources = [
   'card',
   'bank-account'
 ];
-
-test('setup', () => mockFetch.mock());
 
 resources.forEach((resource) => {
 
@@ -96,4 +99,37 @@ test('multi-string resource names (kebab-case)', ({equal}) => {
     });
 });
 
-test('teardown', () => mockFetch.mock());
+test.fetch = test.namespace('fetch');
+test.fetch.beforeEach(() => mockFetch.mock());
+test.fetch.afterEach(() => mockFetch.restore());
+
+test.fetch('arbitary paths with origin', ({equal}) => {
+
+  return api({
+    origin: 'http://test.com'
+  })
+    .fetch('/my-custom-path')
+    .then(response => {
+
+      let req = mockFetch.request();
+
+      equal(response.status, 200, 'status code');
+      equal(req.method, 'GET', 'default method');
+      equal(req.url, 'http://test.com/my-custom-path', 'url with origin');
+    });
+});
+
+test.fetch('with options', ({equal}) => {
+
+  return api()
+    .fetch('/test', {
+      method: 'POST',
+      body: 'my-data'
+    })
+    .then(response => {
+
+      let req = mockFetch.request();
+      equal(req.method, 'POST', 'method from options');
+      equal(req.body, 'my-data', 'body from options');
+    });
+});

@@ -4,7 +4,8 @@
   "description": "Data",
   "main": "src/index.js",
   "scripts": {
-    "test": "hihat __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
+    "test-hihat": "hihat __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
+    "test": "browserify __test__/sdk/*.js __test__/serialize/*.js | smokestack | tap-spec",
     "test-ci": "zuul -- __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js",
     "lint": "lw lint src/ --cache .tmp/lint.json",
     "bundle": "NODE_ENV=production browserify -t [babelify --stage 0] src/index.js > bundle.js"
@@ -29,7 +30,9 @@
     "minifyify": "^7.0.3",
     "mock-fetch": "^1.0.0",
     "react": "^0.13.3",
+    "smokestack": "^3.3.0",
     "tap-dev-tool": "^1.3.0",
+    "tap-spec": "^4.0.2",
     "tessed": "^2.0.0",
     "zuul": "^3.2.0"
   },

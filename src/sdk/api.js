@@ -89,6 +89,18 @@ function api (config = {}) {
     type: 'users'
   });
 
+  let shoppingCarts = makeResource({
+    type: 'shopping-carts'
+  });
+
+  let shoppingCartItems = makeResource({
+    type: 'shopping-cart-items'
+  });
+
+  let charges = makeResource({
+    type: 'charges'
+  });
+
   //// Singletons
 
   let recipient = makeResource({
@@ -105,6 +117,11 @@ function api (config = {}) {
     type: 'bank-account',
     singleton: true
   });
+
+  let fetch = function (...args) {
+
+    return request(config).fetch(...args);
+  };
 
   return assign(
     {config},
@@ -128,11 +145,15 @@ function api (config = {}) {
     medias,
     shoppinglistItems,
     users,
+    shoppingCarts,
+    shoppingCartItems,
+    charges,
 
     // Singletons
     recipient,
     card,
-    bankAccount
+    bankAccount,
+    {fetch}
   );
 }
 

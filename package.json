@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test-hihat": "hihat __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
-    "test": "browserify __test__/sdk/*.js __test__/serialize/*.js | tap-closer | smokestack | tap-spec",
+    "test": "npm run lint && browserify __test__/sdk/*.js __test__/serialize/*.js | tap-closer | smokestack | tap-spec",
     "test-watch": "onchange __test__/*.js __test__/**/*.js src/**/*.js src/*.js -- npm test",
     "test-ci": "zuul -- __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js",
     "lint": "lw lint src/ --cache .tmp/lint.json",

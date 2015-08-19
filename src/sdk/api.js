@@ -1,6 +1,7 @@
 import {assign} from 'lodash';
 
 import resource from './resource';
+import request from './request';
 
 function api (config = {}) {
 

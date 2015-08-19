@@ -7,6 +7,7 @@ import api from '../../src/sdk/api';
 import r from '../../src/sdk/resource';
 
 let test = namespace('api');
+test.fetch = test.namespace('fetch');
 
 let resources = [
   'projects',
@@ -93,6 +94,22 @@ test('multi-string resource names (kebab-case)', ({equal}) => {
       let req = mockFetch.request();
 
       equal(req.url, '/bank-account', 'url');
+    });
+});
+
+test.fetch('arbitary paths with origin', ({equal}) => {
+
+  return api({origin: 'http://google.com'}).fetch('/my-custom-path')
+    .then(response => equal(response.status, 200, 'status code'));
+});
+
+test.fetch.only('uses arbitrary path', ({equal}) => {
+
+  return api().fetch('/my-custom-path')
+    .then(() => {
+
+      let req = mockFetch.request();
+      console.log(req);
     });
 });
 

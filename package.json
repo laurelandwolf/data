@@ -8,7 +8,9 @@
     "test": "npm run lint && browserify __test__/sdk/*.js __test__/serialize/*.js | tap-closer | smokestack | tap-spec",
     "test-ci": "browserify __test__/sdk/*.js __test__/serialize/*.js | smokestack | tap-spec",
     "lint": "lw lint src/ --cache .tmp/lint.json",
-    "bundle": "NODE_ENV=production browserify -t [babelify --stage 0] src/index.js > bundle.js"
+    "bundle": "NODE_ENV=production browserify -t [babelify --stage 0] src/index.js > bundle.js",
+    "karma-start": "karma start",
+    "karma-run": "karma run"
   },
   "dependencies": {
     "as-array": "^1.0.0",
@@ -25,6 +27,10 @@
     "babelify": "^6.1.2",
     "browserify": "^11.0.1",
     "es6-promise": "^2.3.0",
+    "karma": "^0.13.9",
+    "karma-browserify": "^4.3.0",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-tap": "^1.0.3",
     "lw-build": "^1.1.2",
     "minifyify": "^7.0.3",
     "mock-fetch": "^1.0.0",

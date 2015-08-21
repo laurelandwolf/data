@@ -102,6 +102,10 @@ function api (config = {}) {
     type: 'charges'
   });
 
+  let invitations = makeResource({
+    type: 'invitations'
+  });
+
   //// Singletons
 
   let recipient = makeResource({
@@ -149,6 +153,7 @@ function api (config = {}) {
     shoppingCarts,
     shoppingCartItems,
     charges,
+    invitations,
 
     // Singletons
     recipient,

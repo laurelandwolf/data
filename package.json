@@ -7,7 +7,8 @@
     "test-hihat": "hihat __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
     "test": "npm run lint && browserify __test__/sdk/*.js __test__/serialize/*.js | tap-closer | smokestack | tap-spec",
     "test-watch": "onchange __test__/*.js __test__/**/*.js src/**/*.js src/*.js -- npm test",
-    "test-ci": "zuul -- __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js",
+    "test-ci": "zuul -- __test__/sdk/*.js __test__/serialize/*.js",
+    "test-local": "zuul --local 8080 -- __test__/sdk/index.js",
     "lint": "lw lint src/ --cache .tmp/lint.json",
     "bundle": "NODE_ENV=production browserify -t [babelify --stage 0] src/index.js > bundle.js"
   },
@@ -26,7 +27,6 @@
     "babelify": "^6.1.2",
     "browserify": "^11.0.1",
     "es6-promise": "^2.3.0",
-    "hihat": "^2.4.1",
     "lw-build": "^1.1.2",
     "minifyify": "^7.0.3",
     "mock-fetch": "^1.0.0",

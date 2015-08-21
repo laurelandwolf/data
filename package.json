@@ -6,9 +6,7 @@
   "scripts": {
     "test-hihat": "hihat __test__/state/*.js __test__/sdk/*.js __test__/serialize/*.js -- -t [babelify --stage 0] -p tap-dev-tool",
     "test": "npm run lint && browserify __test__/sdk/*.js __test__/serialize/*.js | tap-closer | smokestack | tap-spec",
-    "test-watch": "onchange __test__/*.js __test__/**/*.js src/**/*.js src/*.js -- npm test",
-    "test-ci": "zuul -- __test__/sdk/*.js __test__/serialize/*.js",
-    "test-local": "zuul --local 8080 -- __test__/sdk/index.js",
+    "test-ci": "npm test",
     "lint": "lw lint src/ --cache .tmp/lint.json",
     "bundle": "NODE_ENV=production browserify -t [babelify --stage 0] src/index.js > bundle.js"
   },

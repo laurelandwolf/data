@@ -27,7 +27,7 @@
     "browserify": "^11.0.1",
     "es6-promise": "^2.3.0",
     "hihat": "^2.4.1",
-    "lw-build": "github:laurelandwolf/build",
+    "lw-build": "^1.1.2",
     "minifyify": "^7.0.3",
     "mock-fetch": "^1.0.0",
     "onchange": "^2.0.0",

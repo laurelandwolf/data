@@ -32,7 +32,8 @@ let resources = [
   'shoppingCarts',
   'shoppingCartItems',
   'charges',
-  'invitations'
+  'invitations',
+  'submissions'
 ];
 
 let singletonResources = [

@@ -27,7 +27,8 @@
     "mock-fetch": "^1.0.0",
     "tap-dev-tool": "^1.3.0",
     "tap-spec": "^4.1.0",
-    "tessed": "^2.0.0"
+    "tessed": "^2.0.0",
+    "zuul": "^3.3.1"
   },
   "browserify": {
     "transform": [

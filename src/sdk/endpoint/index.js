@@ -1,5 +1,4 @@
 import {merge, isEmpty} from 'lodash';
-import raf from 'raf';
 
 import request from '../request';
 import qshash from './qs-hash';
@@ -49,7 +48,7 @@ function endpoint ({uri = '/', method = 'GET', payload} = {}, apiConfig) {
 
   let promise = new Promise((resolve, reject) => {
 
-    raf(() => {
+    process.nextTick(() => {
 
       let requestUri = renderEndpointUri();
       let payloadBody = {};

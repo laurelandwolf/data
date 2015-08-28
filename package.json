@@ -1,7 +1,7 @@
 {
   "name": "lw-data",
   "version": "0.3.0",
-  "description": "Data",
+  "description": "Laurel & Wolf Cowboy Data",
   "main": "dist/index.js",
   "scripts": {
     "test": "npm run lint && hihat __test__/index.js __test__/sdk/*.js __test__/serialize/*.js -- --transform [babelify --stage 0] -p tap-dev-tool",
@@ -9,7 +9,7 @@
     "lint": "lw lint src/ --cache .tmp/lint.json",
     "clean": "rm -rf ./dist",
     "bundle": "babel --stage 0 src --out-dir dist",
-    "postinstall": "npm run clean &&npm run bundle"
+    "postinstall": "npm run clean && npm run bundle"
   },
   "dependencies": {
     "as-array": "^2.0.0",

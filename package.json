@@ -1,6 +1,6 @@
 {
   "name": "lw-data",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Laurel & Wolf Cowboy Data",
   "main": "dist/index.js",
   "scripts": {
@@ -8,13 +8,10 @@
     "test-ci": "zuul -- __test__/index.js __test__/sdk/*.js __test__/serialize/*.js",
     "lint": "lw lint src/ --cache .tmp/lint.json",
     "clean": "rm -rf ./dist",
-    "bundle": "babel --stage 0 src --out-dir dist",
-    "postinstall": "npm run clean && npm run bundle"
+    "bundle": "babel --stage 0 src --out-dir dist"
   },
   "dependencies": {
     "as-array": "^2.0.0",
-    "babel": "^5.8.23",
-    "babelify": "^6.2.0",
     "is-number": "^2.0.2",
     "is-promise": "^2.0.0",
     "join-path": "^1.1.0",
@@ -22,6 +19,8 @@
     "pluralize": "^1.1.5"
   },
   "devDependencies": {
+    "babel": "^5.8.23",
+    "babelify": "^6.2.0",
     "es6-promise": "^3.0.2",
     "lw-build": "^1.1.2",
     "mock-fetch": "^1.0.0",

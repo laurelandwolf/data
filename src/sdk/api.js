@@ -2,6 +2,7 @@ import {assign} from 'lodash';
 
 import resource from './resource';
 import request from './request';
+import {BULK_HEADERS} from './headers';
 
 function api (config = {}) {
 
@@ -139,12 +140,24 @@ function api (config = {}) {
     singleton: true
   });
 
-  let fetch = function (...args) {
+  function fetch (...args) {
 
     return request(config).fetch(...args);
-  };
+  }
+
+  function bulk () {
+
+    return api({
+      ...config,
+      headers: {
+        ...(config.headers || {}),
+        ...BULK_HEADERS
+      }
+    });
+  }
 
   return assign(
+    {},
     {config},
 
     // Resources
@@ -179,7 +192,10 @@ function api (config = {}) {
     recipient,
     card,
     bankAccount,
-    {fetch}
+    {
+      fetch,
+      bulk
+    }
   );
 }
 

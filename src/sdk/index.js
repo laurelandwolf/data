@@ -1,21 +1,19 @@
 import {merge} from 'lodash';
 
 import api from './api';
+import {DEFAULT_HEADERS} from './headers';
 
 export default function sdk (globalSpec = {}) {
 
   let defaultSpec = {
     origin: '',
-    headers: {
-      'Content-Type': 'application/vnd.api+json',
-      'Accept': 'application/vnd.api+json'
-    }
+    headers: DEFAULT_HEADERS
   };
-  let configuredSpec = merge(defaultSpec, globalSpec);
+  let configuredSpec = merge({}, defaultSpec, globalSpec);
 
   function apiFactory (instanceSpec = {}) {
 
-    return api(merge(configuredSpec, instanceSpec));
+    return api(merge({}, configuredSpec, instanceSpec));
   }
 
   return apiFactory;

@@ -72,6 +72,17 @@ test('multi-string resource names (kebab-case)', ({equal}) => {
     });
 });
 
+test('bulk resources', ({equal, deepEqual}) => {
+
+  equal(typeof api().bulk, 'function', 'function on api');
+  deepEqual(api().bulk().config, {
+    headers: {
+      'Content-Type': 'application/vnd.api+json; ext=bulk',
+      'Accept': 'application/vnd.api+json; ext=bulk'
+    }
+  }, 'bulk api headers');
+});
+
 test.fetch = test.namespace('fetch');
 test.fetch.beforeEach(() => mockFetch.mock());
 test.fetch.afterEach(() => mockFetch.restore());

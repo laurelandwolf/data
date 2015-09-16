@@ -73,3 +73,18 @@ test('api overwrites global configs', ({equal}) => {
 
   equal(overridenApiConfig.origin, 'http://overridden.com', 'overridden origin');
 });
+
+test('bulk headers overwrite default headers', ({deepEqual}) => {
+
+  let api = sdk();
+
+  deepEqual(api().config.headers, {
+    'Content-Type': 'application/vnd.api+json',
+    'Accept': 'application/vnd.api+json'
+  }, 'default headers');
+
+  deepEqual(api().bulk().config.headers, {
+    'Content-Type': 'application/vnd.api+json; ext=bulk',
+    'Accept': 'application/vnd.api+json; ext=bulk'
+  }, 'bulk headers');
+});

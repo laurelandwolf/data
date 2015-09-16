@@ -110,6 +110,18 @@ function api (config = {}) {
     type: 'submissions'
   });
 
+  let submissionStyleBoards = makeResource({
+    type: 'submission-style-board'
+  });
+
+  let submissionStyleBoardTags = makeResource({
+    type: 'submission-style-board-tags'
+  });
+
+  let submissionStyleBoardTagPlacements = makeResource({
+    type: 'submission-style-board-tag-placements'
+  });
+
   //// Singletons
 
   let recipient = makeResource({
@@ -159,6 +171,9 @@ function api (config = {}) {
     charges,
     invitations,
     submissions,
+    submissionStyleBoards,
+    submissionStyleBoardTags,
+    submissionStyleBoardTagPlacements,
 
     // Singletons
     recipient,

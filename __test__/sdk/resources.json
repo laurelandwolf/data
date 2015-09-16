@@ -21,5 +21,8 @@
   "shoppingCartItems",
   "charges",
   "invitations",
-  "submissions"
+  "submissions",
+  "submission-style-boards",
+  "submission-style-board-tags",
+  "submission-style-board-tag-placements"
 ]

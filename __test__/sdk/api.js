@@ -6,41 +6,12 @@ import pluralize from 'pluralize';
 import api from '../../src/sdk/api';
 import r from '../../src/sdk/resource';
 
+let resources = require('./resources');
+let singletonResources = require('./singleton-resources');
+
 let test = namespace('api');
 test.beforeEach(() => mockFetch.mock());
 test.afterEach(() => mockFetch.restore());
-
-let resources = [
-  'projects',
-  'designers',
-  'rooms',
-  'floor-plans',
-  'comments',
-  'photos',
-  'inspiration-links',
-  'inspiration-images',
-  'design-package-floor-plans',
-  'style-boards',
-  'style-board-tags',
-  'design-package-instructions',
-  'furniture',
-  'design-packages',
-  'portfolio-images',
-  'media',
-  'shopping-list-items',
-  'users',
-  'shoppingCarts',
-  'shoppingCartItems',
-  'charges',
-  'invitations',
-  'submissions'
-];
-
-let singletonResources = [
-  'recipient',
-  'card',
-  'bank-account'
-];
 
 resources.forEach((resource) => {
 

@@ -11,4 +11,4 @@ const BULK_HEADERS = {
 export default {
   DEFAULT_HEADERS,
   BULK_HEADERS
-}
+};

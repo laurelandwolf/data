@@ -112,7 +112,7 @@ function api (config = {}) {
   });
 
   let submissionStyleBoards = makeResource({
-    type: 'submission-style-board'
+    type: 'submission-style-boards'
   });
 
   let submissionStyleBoardTags = makeResource({

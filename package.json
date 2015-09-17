@@ -1,6 +1,6 @@
 {
   "name": "lw-data",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Laurel & Wolf Cowboy Data",
   "main": "dist/index.js",
   "scripts": {

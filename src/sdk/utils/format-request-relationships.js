@@ -13,7 +13,7 @@ function formatRequestRelationships (relationships) {
         return [name, {
           data: {
             type: pluralize(name, 2),
-            id: Number(data)
+            id: data
           }
         }];
       }
@@ -24,7 +24,7 @@ function formatRequestRelationships (relationships) {
             if (isNumber(val)) {
               return {
                 type: pluralize(name, 2),
-                id: Number(val)
+                id: val
               };
             }
             else {

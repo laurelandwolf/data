@@ -1,4 +1,4 @@
-import {merge, isEmpty} from 'lodash';
+import {merge, isEmpty, map} from 'lodash';
 
 import request from '../request';
 import qshash from './qs-hash';
@@ -66,6 +66,10 @@ function endpoint ({uri = '/', method = 'GET', payload} = {}, apiConfig) {
         } : payload;
       }
 
+      if (apiConfig.bulk === true) {
+        payloadBody = formatPayloadForBulk(payloadBody);
+      }
+
       req[method.toLowerCase()](requestUri, {
         data: payloadBody
       })
@@ -117,6 +121,18 @@ function endpoint ({uri = '/', method = 'GET', payload} = {}, apiConfig) {
   }
 
   return promise;
+}
+
+function formatPayloadForBulk ({attributes, type, relationships}) {
+
+  return map(attributes, attrs => {
+
+    return {
+      type,
+      attributes: attrs,
+      relationships
+    };
+  });
 }
 
 export default endpoint;

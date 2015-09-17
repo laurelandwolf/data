@@ -10,6 +10,7 @@ let resources = require('./resources');
 let singletonResources = require('./singleton-resources');
 
 let test = namespace('api');
+test.bulk = test.namespace('bulk');
 test.beforeEach(() => mockFetch.mock());
 test.afterEach(() => mockFetch.restore());
 
@@ -72,14 +73,15 @@ test('multi-string resource names (kebab-case)', ({equal}) => {
     });
 });
 
-test('bulk resources', ({equal, deepEqual}) => {
+test.bulk('resources', ({equal, deepEqual}) => {
 
   equal(typeof api().bulk, 'function', 'function on api');
   deepEqual(api().bulk().config, {
     headers: {
       'Content-Type': 'application/vnd.api+json; ext=bulk',
       'Accept': 'application/vnd.api+json; ext=bulk'
-    }
+    },
+    bulk: true
   }, 'bulk api headers');
 });
 

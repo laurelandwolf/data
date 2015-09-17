@@ -152,7 +152,8 @@ function api (config = {}) {
       headers: {
         ...(config.headers || {}),
         ...BULK_HEADERS
-      }
+      },
+      bulk: true
     });
   }
 

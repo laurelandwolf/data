@@ -326,13 +326,74 @@ test.creating('relationship with id as a string', function ({context, deepEqual}
               project: {
                 data: {
                   type: 'projects',
-                  id: 123
+                  id: '123'
                 }
               }
             }
           }
         }, 'request body');
       });
+});
+
+test.creating('bulk and with relationships', function ({equal, deepEqual}) {
+
+  let thing = resource({
+    type: 'submission-style-board-tags'
+  }, {
+    bulk: true
+  });
+
+  return thing
+    .createSubmissionStyleBoardTags([
+      {body: 'body1', position: '1'},
+      {body: 'body2', position: '2'}
+    ])
+    .relatedTo({
+      submission: {type: 'submission-style-boards', id: '123'}
+    })
+      .then(res => {
+
+        let responseBody = JSON.parse(res.body.body);
+
+        equal(responseBody.data.length, 2, 'data is an array');
+        deepEqual(responseBody.data[0].attributes, {
+          body: 'body1',
+          position: '1'
+        }, 'first resource attributes');
+        deepEqual(responseBody.data[0].relationships, {
+          submission: {
+            data: {type: 'submission-style-boards', id: '123'}
+          }
+        }, 'first resource relationships');
+        equal(responseBody.data[1].type, 'submission-style-board-tags', 'second resource type');
+      });
+});
+
+test.creating('bulk and with relationships shorthand', function ({equal, deepEqual}) {
+
+  let thing = resource({
+    type: 'submission-style-board-tags'
+  }, {
+    bulk: true
+  });
+
+  return thing
+    .createSubmissionStyleBoardTags([
+      {body: 'body1', position: '1'},
+      {body: 'body2', position: '2'}
+    ])
+    .relatedTo({
+      submission: '123'
+    }).
+      then(res => {
+
+        let responseBody = JSON.parse(res.body.body);
+        deepEqual(responseBody.data[0].relationships, {
+          submission: {
+            data: {type: 'submissions', id: '123'}
+          }
+        }, 'first resource relationships');
+      })
 });
 
 test.updating('uses PATCH method', ({context, equal}) => {
@@ -404,6 +465,40 @@ test.updating('with relationships', ({context, equal}) => {
       });
 });
 
+test.updating('bulk and with relationships', function ({equal, deepEqual}) {
+
+  let thing = resource({
+    type: 'submission-style-board-tags'
+  }, {
+    bulk: true
+  });
+
+  return thing
+    .updateSubmissionStyleBoardTags([
+      {body: 'body1', position: '1'},
+      {body: 'body2', position: '2'}
+    ])
+    .relatedTo({
+      submission: {type: 'submission-style-boards', id: '123'}
+    })
+      .then(res => {
+
+        let responseBody = JSON.parse(res.body.body);
+
+        equal(responseBody.data.length, 2, 'data is an array');
+        deepEqual(responseBody.data[0].attributes, {
+          body: 'body1',
+          position: '1'
+        }, 'first resource attributes');
+        deepEqual(responseBody.data[0].relationships, {
+          submission: {
+            data: {type: 'submission-style-boards', id: '123'}
+          }
+        }, 'first resource relationships');
+        equal(responseBody.data[1].type, 'submission-style-board-tags', 'second resource type');
+      });
+});
+
 test.deleting('uses DELETE method', ({context, equal}) => {
 
   return context.projects.deleteProject(1)
@@ -449,6 +544,30 @@ test.deleting('correctly handles 204 status code', ({context, equal}) => {
 
       equal(res.body, undefined, 'no body returned');
     });
+});
+
+// TODO: implement bulk deleting
+test.deleting.skip('bulk', function ({equal, deepEqual}) {
+
+  let thing = resource({
+    type: 'submission-style-board-tags'
+  }, {
+    bulk: true
+  });
+
+  return thing
+    .deleteSubmissionStyleBoardTags([1, 2])
+      .then(res => {
+        console.log(res);
+        // let responseBody = JSON.parse(res.body.body);
+
+        // equal(responseBody.data.length, 2, 'data is an array');
+        // deepEqual(responseBody.data[0].attributes, {
+        //   body: 'body1',
+        //   position: '1'
+        // }, 'first resource attributes');
+        // equal(responseBody.data[1].type, 'submission-style-board-tags', 'second resource type');
+      });
 });
 
 test.query('encodes special characters for URIs', ({context, equal}) => {

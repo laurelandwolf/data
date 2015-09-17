@@ -91,6 +91,14 @@ function resource (spec, globalConfig = {}) {
     [resourceName('delete', type)]: del
   };
 
+  // Create aliased, plural version of and endpoint
+  // for a bulk request
+  if (globalConfig.bulk === true) {
+    routes[resourceName('create', type, true)] = create;
+    routes[resourceName('update', type, true)] = update;
+    routes[resourceName('delete', type, true)] = del;
+  }
+
   if (!singleton) {
     routes[resourceName('get', type, true)] = getAll;
   }

@@ -558,7 +558,7 @@ test.deleting.skip('bulk', function ({equal, deepEqual}) {
   return thing
     .deleteSubmissionStyleBoardTags([1, 2])
       .then(res => {
-        console.log(res);
+
         // let responseBody = JSON.parse(res.body.body);
 
         // equal(responseBody.data.length, 2, 'data is an array');

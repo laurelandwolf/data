@@ -3,6 +3,7 @@ import {namespace} from 'tessed';
 import normalize from '../../src/serialize/normalize';
 import multiResponseData from '../mock/multi-response.json';
 import requestData from '../mock/request.json';
+import requestDataMultiple from '../mock/request-multiple.json';
 
 let test = namespace('format');
 test.response = test.namespace('response');
@@ -64,17 +65,20 @@ test.request('format body for single item', ({equal, deepEqual}) => {
   }, 'relationship keys and relationship data type');
 });
 
-test.request('format body for multiple items', ({equal, deepEqual}) => {
+test.request('bulk items', ({equal, pass, fail}) => {
 
-  let body = normalize.request([requestData, requestData]);
+  let body = normalize.request(requestDataMultiple);
 
-  equal(body.length, 2, 'both items');
-  equal(body[0].data.type, 'photo-things', 'body type');
-  equal(body[0].data.attributes['url-src'], 'http://test.com', 'attribute keys');
-  deepEqual(body[0].data.relationships['photo-person'], {
-    data: {
-      id: '9',
-      type: 'another-thing'
-    }
-  }, 'relationship keys and relationship data type');
+  equal(body.data[0].type, 'photo-things', 'body type');
+  equal(body.data[0].attributes['url-src'], 'http://test.com', 'attributes key');
+
+  try {
+    body.data[0].relationships['photo-person'].data;
+    pass('relationships key');
+  }
+  catch (e) {
+    fail('relationships key');
+  }
+
+  equal(body.data[0].relationships['photo-person'].data.type, 'another-thing', 'relationship type value');
 });

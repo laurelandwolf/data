@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "type": "photoThings",
+      "attributes": {
+        "title": "Ember Hamster",
+        "urlSrc": "http://test.com"
+      },
+      "relationships": {
+        "photoPerson": {
+          "data": { "type": "anotherThing", "id": "9" }
+        }
+      }
+    },
+    {
+      "type": "photoThings",
+      "attributes": {
+        "title": "Ember Hamster",
+        "urlSrc": "http://test.com"
+      },
+      "relationships": {
+        "photoPerson": {
+          "data": { "type": "anotherThing", "id": "9" }
+        }
+      }
+    }
+  ]
+}

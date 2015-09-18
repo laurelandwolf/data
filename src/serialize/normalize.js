@@ -86,19 +86,16 @@ function normalizeResponse ({data, included}, formatter = camelCase) {
   };
 }
 
-function normalizeRequest (data, formatter = dashCase) {
+function normalizeRequest (body, formatter = dashCase) {
 
-  function formatRequest (body) {
+  let data = Array.isArray(body.data)
+    ? map(body.data, resource => formatResourceRequest(resource, formatter))
+    : formatResourceRequest(body.data, formatter);
 
-    return {
-      ...body,
-      data: formatResourceRequest(body.data, formatter)
-    };
-  }
-
-  return Array.isArray(data)
-    ? map(data, formatRequest)
-    : formatRequest(data);
+  return {
+    ...body,
+    data
+  };
 }
 
 export default {

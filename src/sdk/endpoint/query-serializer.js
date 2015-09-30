@@ -3,57 +3,57 @@ import {
   isObject,
   all,
   forEach
-} from 'lodash';
+} from 'lodash'
 
 function querySerializer () {
 
-  let list = [];
+  let list = []
 
   function serialize (object, prefix) {
 
-    let qs = [];
+    let qs = []
     forEach(object, (value, key) => {
 
-      let paramKey = typeof key === 'number' ? '' : key;
-      let k = prefix ? `${prefix}[${paramKey}]` : key;
+      let paramKey = typeof key === 'number' ? '' : key
+      let k = prefix ? `${prefix}[${paramKey}]` : key
       let serialized =
         typeof value === 'object'
           ? serialize(value, k)
-          : [k, value].map(encodeURIComponent).join('=');
-      qs.push(serialized);
-    });
-    return qs.join('&');
+          : [k, value].map(encodeURIComponent).join('=')
+      qs.push(serialized)
+    })
+    return qs.join('&')
   }
 
   function parseQueries (queries, ...newQueries) {
 
-    let newQuery;
+    let newQuery
     if (all(newQueries, isString) && newQueries.length === 2) {
-      newQuery = newQueries.map(encodeURIComponent).join('=');
+      newQuery = newQueries.map(encodeURIComponent).join('=')
     }
     else if (isObject(...newQueries)) {
-      newQuery = serialize(newQueries);
+      newQuery = serialize(newQueries)
     }
 
-    return queries.concat(newQuery);
+    return queries.concat(newQuery)
   }
 
   return {
     add (...queries) {
 
-      list = parseQueries(list, ...queries);
+      list = parseQueries(list, ...queries)
     },
 
     stringify () {
 
-      return list.join('&');
+      return list.join('&')
     },
 
     count () {
 
-      return list.length;
+      return list.length
     }
-  };
+  }
 }
 
-export default querySerializer;
+export default querySerializer

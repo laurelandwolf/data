@@ -1,28 +1,28 @@
-import {capitalize, defaults, camelCase} from 'lodash';
-import pluralize from 'pluralize';
+import {capitalize, defaults, camelCase} from 'lodash'
+import pluralize from 'pluralize'
 
-import validate from './utils/validate';
-import endpoint from './endpoint';
+import validate from './utils/validate'
+import endpoint from './endpoint'
 
 function resourceName (method, type, plural = false) {
 
-  return `${method.toLowerCase()}${capitalize(pluralize(camelCase(type), plural ? 2 : 1))}`;
+  return `${method.toLowerCase()}${capitalize(pluralize(camelCase(type), plural ? 2 : 1))}`
 }
 
 function resource (spec, globalConfig = {}) {
 
-  let {type, singleton} = defaults(spec, {singleton: false});
+  let {type, singleton} = defaults(spec, {singleton: false})
 
-  validate.type(type);
+  validate.type(type)
 
   function uri (id) {
 
-    let u = `/${type}`;
+    let u = `/${type}`
     if (!singleton && id !== undefined) {
-      u += `/${id}`;
+      u += `/${id}`
     }
 
-    return u;
+    return u
   }
 
   // Get All
@@ -31,7 +31,7 @@ function resource (spec, globalConfig = {}) {
     return endpoint({
       uri: uri(),
       method: 'GET'
-    }, globalConfig);
+    }, globalConfig)
   }
 
   function getOne (id) {
@@ -39,7 +39,7 @@ function resource (spec, globalConfig = {}) {
     return endpoint({
       uri: uri(id),
       method: 'GET'
-    }, globalConfig);
+    }, globalConfig)
   }
 
   function create (attributes) {
@@ -47,33 +47,33 @@ function resource (spec, globalConfig = {}) {
     let payload = {
       type,
       attributes
-    };
+    }
 
     return endpoint({
       uri: uri(),
       method: 'POST',
       payload
-    }, globalConfig);
+    }, globalConfig)
   }
 
   function update (id, attributes) {
 
     if (typeof id === 'object') {
-      attributes = id;
-      id = undefined;
+      attributes = id
+      id = undefined
     }
 
     let payload = {
       type,
       id,
       attributes
-    };
+    }
 
     return endpoint({
       uri: uri(id),
       method: 'PATCH',
       payload
-    }, globalConfig);
+    }, globalConfig)
   }
 
   function del (id) {
@@ -81,29 +81,31 @@ function resource (spec, globalConfig = {}) {
     return endpoint({
       uri: uri(id),
       method: 'DELETE'
-    }, globalConfig);
+    }, globalConfig)
   }
 
-  let routes = {
-    [resourceName('get', type)]: getOne,
-    [resourceName('create', type)]: create,
-    [resourceName('update', type)]: update,
-    [resourceName('delete', type)]: del
-  };
+  let initiateResource = function initiateResource () {
+
+  }
+
+  initiateResource[resourceName('get', type)] = getOne
+  initiateResource[resourceName('create', type)] = create
+  initiateResource[resourceName('update', type)] = update
+  initiateResource[resourceName('delete', type)] = del
 
   // Create aliased, plural version of and endpoint
   // for a bulk request
   if (globalConfig.bulk === true) {
-    routes[resourceName('create', type, true)] = create;
-    routes[resourceName('update', type, true)] = update;
-    routes[resourceName('delete', type, true)] = del;
+    initiateResource[resourceName('create', type, true)] = create
+    initiateResource[resourceName('update', type, true)] = update
+    initiateResource[resourceName('delete', type, true)] = del
   }
 
   if (!singleton) {
-    routes[resourceName('get', type, true)] = getAll;
+    initiateResource[resourceName('get', type, true)] = getAll
   }
 
-  return routes;
+  return initiateResource
 }
 
-export default resource;
+export default resource

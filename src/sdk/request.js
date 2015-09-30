@@ -1,21 +1,21 @@
-import {merge, omit, pick, get as _get} from 'lodash';
-import joinPath from 'join-path';
+import {omit, pick, get as _get} from 'lodash'
+import joinPath from 'join-path'
 
 function request (spec = {}) {
 
   if (!window.Promise) {
-    throw new Error('window.Promise not supported. Please provide a plolyfill.');
+    throw new Error('window.Promise not supported. Please provide a plolyfill.')
   }
 
   if (!window.fetch) {
-    throw new Error('window.fetch not supported. Please provide a plolyfill.');
+    throw new Error('window.fetch not supported. Please provide a plolyfill.')
   }
 
-  let origin = spec.origin || '';
-  let defaultMethod = 'GET';
+  let origin = spec.origin || ''
+  let defaultMethod = 'GET'
 
   // Options that are used for every request
-  let fetchConfig = omit(spec, 'origin', 'fetch');
+  let fetchConfig = omit(spec, 'origin', 'fetch')
 
   function httpRequest (url, options) {
 
@@ -23,10 +23,10 @@ function request (spec = {}) {
 
       // Latest custom fetch options
       if (options) {
-        fetchConfig = merge(fetchConfig, options);
+        fetchConfig = {...fetchConfig, ...options}
       }
 
-      fetchConfig = merge({method: defaultMethod}, fetchConfig);
+      fetchConfig = {...{method: defaultMethod}, ...fetchConfig}
 
       window.fetch(joinPath(origin, url), fetchConfig)
         .then((response) => {
@@ -38,16 +38,16 @@ function request (spec = {}) {
             resolve({
               status: response.status,
               headers: response.headers
-            });
+            })
           }
           else {
 
             // TODO: check res.headers.get('Content-Type') to see
             //       if json should even be parsed
-            let contentType = 'json';
-            let contentTypeGetter = _get(response, 'headers.get');
+            let contentType = 'json'
+            let contentTypeGetter = _get(response, 'headers.get')
             if (contentTypeGetter) {
-              contentType = response.headers.get('content-type').indexOf('vnd.api+json') > -1 ? 'json' : 'text';
+              contentType = response.headers.get('content-type').indexOf('vnd.api+json') > -1 ? 'json' : 'text'
             }
             response[contentType]().then((body) => {
 
@@ -56,24 +56,24 @@ function request (spec = {}) {
                   status: response.status,
                   headers: response.headers,
                   body
-                });
+                })
               }
               else {
-                let responseObject = merge(pick(response, 'status', 'statusText'), {body});
-                reject(responseObject);
+                let responseObject = {...pick(response, 'status', 'statusText'), body}
+                reject(responseObject)
               }
-            });
+            })
           }
 
-        });
-    });
+        })
+    })
   }
 
   function get (url) {
 
     return httpRequest(url, {
       method: 'GET'
-    });
+    })
   }
 
   function post (url, payload = {}) {
@@ -81,7 +81,7 @@ function request (spec = {}) {
     return httpRequest(url, {
       method: 'POST',
       body: JSON.stringify(payload)
-    });
+    })
   }
 
   function put (url, payload = {}) {
@@ -89,7 +89,7 @@ function request (spec = {}) {
     return httpRequest(url, {
       method: 'PUT',
       body: JSON.stringify(payload)
-    });
+    })
   }
 
   function patch (url, payload = {}) {
@@ -97,14 +97,14 @@ function request (spec = {}) {
     return httpRequest(url, {
       method: 'PATCH',
       body: JSON.stringify(payload)
-    });
+    })
   }
 
   function del (url) {
 
     return httpRequest(url, {
       method: 'DELETE'
-    });
+    })
   }
 
   return {
@@ -114,7 +114,7 @@ function request (spec = {}) {
     put,
     patch,
     'delete': del
-  };
+  }
 }
 
-export default request;
+export default request

@@ -2,14 +2,14 @@ import _, {
   isString,
   map,
   isObject
-} from 'lodash';
+} from 'lodash'
 
-import {dashCase} from '../../serialize/format';
+import {dashCase} from '../../serialize/format'
 
 function qslist (name) {
 
-  let list = [];
-  let includesWithOptions = [];
+  let list = []
+  let includesWithOptions = []
 
   function parseList (includes, ...args) {
 
@@ -18,7 +18,7 @@ function qslist (name) {
 
         // i.e. rooms.inspirationLinks
         if (isString(item)) {
-          return map(item.split('.'), dashCase).join('.');
+          return map(item.split('.'), dashCase).join('.')
         }
 
         // i.e. - {rooms: ['inspirationLinks']}
@@ -26,45 +26,45 @@ function qslist (name) {
 
           return map(vals, (val) => {
 
-            let type = val;
+            let type = val
 
             // i.e. - {rooms: [{type: 'photos', ignoreRelationships: ['rooms']}]}
             if (isObject(type)) {
-              type = val.type;
-              includesWithOptions.push(val);
+              type = val.type
+              includesWithOptions.push(val)
             }
 
-            return `${dashCase(field)}.${dashCase(type)}`;
-          });
-        });
+            return `${dashCase(field)}.${dashCase(type)}`
+          })
+        })
       })
       .flattenDeep()
-      .value();
+      .value()
 
-    return includes.concat(newIncludes);
+    return includes.concat(newIncludes)
   }
 
   return {
     push (...args) {
 
-      list = parseList(list, ...args);
+      list = parseList(list, ...args)
     },
 
     stringify () {
 
-      return `${dashCase(name)}=${list.join(',')}`;
+      return `${dashCase(name)}=${list.join(',')}`
     },
 
     count () {
 
-      return list.length;
+      return list.length
     },
 
     ignoreRelationships () {
 
-      return includesWithOptions;
+      return includesWithOptions
     }
-  };
+  }
 }
 
-export default qslist;
+export default qslist

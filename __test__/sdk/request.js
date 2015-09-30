@@ -1,10 +1,10 @@
-import {namespace} from 'tessed';
-import mockFetch from 'mock-fetch';
+import {namespace} from 'tessed'
+import mockFetch from 'mock-fetch'
 
-import request from '../../src/sdk/request';
+import request from '../../src/sdk/request'
 
-const ORIGIN = 'https://api.laurelandwolf.com/v1.0';
-let test = namespace('request');
+const ORIGIN = 'https://api.laurelandwolf.com/v1.0'
+let test = namespace('request')
 
 test.beforeEach(() => {
 
@@ -14,10 +14,10 @@ test.beforeEach(() => {
         custom: 'header'
       }
     }
-  });
-});
+  })
+})
 
-test.afterEach(() => mockFetch.restore());
+test.afterEach(() => mockFetch.restore())
 
 test('custom origin', ({equal}) => {
 
@@ -26,11 +26,11 @@ test('custom origin', ({equal}) => {
   }).get('/test')
     .then((res) => {
 
-      let req = mockFetch.request();
+      let req = mockFetch.request()
 
-      equal(req.url, ORIGIN + '/test', 'url with origin');
-    });
-});
+      equal(req.url, ORIGIN + '/test', 'url with origin')
+    })
+})
 
 test('normalizes path when combining origin and request url', ({equal}) => {
 
@@ -39,10 +39,10 @@ test('normalizes path when combining origin and request url', ({equal}) => {
   }).get('/test')
     .then((res) => {
 
-      let req = mockFetch.request();
-      equal(req.url, 'https://api.laurelandwolf.com/v1.0/test', 'normalized path');
-    });
-});
+      let req = mockFetch.request()
+      equal(req.url, 'https://api.laurelandwolf.com/v1.0/test', 'normalized path')
+    })
+})
 
 test('custom headers', ({deepEqual}) => {
 
@@ -53,13 +53,13 @@ test('custom headers', ({deepEqual}) => {
   }).get('/test')
     .then((res) => {
 
-      let req = mockFetch.request();
+      let req = mockFetch.request()
 
       deepEqual(req.headers, {
         custom: 'header'
-      }, 'headers set');
-    });
-});
+      }, 'headers set')
+    })
+})
 
 test('bare fetch', ({equal, deepEqual}) => {
 
@@ -71,37 +71,37 @@ test('bare fetch', ({equal, deepEqual}) => {
   })
     .then((res) => {
 
-      let req = mockFetch.request();
+      let req = mockFetch.request()
 
-      equal(req.method, 'GET', 'method');
+      equal(req.method, 'GET', 'method')
       deepEqual(req.headers, {
         custom: 'header'
-      }, 'headers');
-    });
-});
+      }, 'headers')
+    })
+}); // NOTE: this semicolon is needed for some reason????
 
 ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].forEach((method) => {
 
   test(method, ({equal}) => {
 
-    let req = request();
+    let req = request()
 
     return req[method.toLowerCase()]('/test')
       .then((res) => {
 
-        let req = mockFetch.request();
-        equal(req.method, method, method + ' method');
-      });
-  });
-});
+        let req = mockFetch.request()
+        equal(req.method, method, method + ' method')
+      })
+  })
+})
 
 test('status', ({equal}) => {
 
     return request().get().then((res) => {
 
-      equal(res.status, 200, '200 status');
-    });
-});
+      equal(res.status, 200, '200 status')
+    })
+})
 
 test('headers', ({deepEqual}) => {
 
@@ -109,6 +109,6 @@ test('headers', ({deepEqual}) => {
 
     deepEqual(res.headers, {
       custom: 'header'
-    }, 'custom headers');
-  });
-});
+    }, 'custom headers')
+  })
+})

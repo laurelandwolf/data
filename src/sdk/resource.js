@@ -6,7 +6,12 @@ import endpoint from './endpoint'
 
 function resourceName (method, type, plural = false) {
 
-  return `${method.toLowerCase()}${capitalize(pluralize(camelCase(type), plural ? 2 : 1))}`
+  return `${method.toLowerCase()}${capitalize(formattedType(type, plural))}`
+}
+
+function formattedType (type, plural = false) {
+
+	return pluralize(camelCase(type), plural ? 2 : 1)
 }
 
 function resource (spec, globalConfig = {}) {
@@ -25,7 +30,13 @@ function resource (spec, globalConfig = {}) {
     return u
   }
 
-  // Get All
+  function get (id, singleton = false) {
+
+  	return (id !== undefined || singleton)
+  		? getOne(id)
+  		: getAll()
+  }
+
   function getAll () {
 
     return endpoint({
@@ -84,28 +95,40 @@ function resource (spec, globalConfig = {}) {
     }, globalConfig)
   }
 
-  let initiateResource = function initiateResource () {
+  let resourceType = formattedType(type, (!singleton || globalConfig.bulk === true))
+  let routes = {
+  	[resourceType]: function (/* TODO: options here */) {
 
+			return {
+				get (id) {
+
+					return get(id, singleton)
+				},
+				create,
+				update,
+				'delete': del
+			}
+  	}
   }
 
-  initiateResource[resourceName('get', type)] = getOne
-  initiateResource[resourceName('create', type)] = create
-  initiateResource[resourceName('update', type)] = update
-  initiateResource[resourceName('delete', type)] = del
+  routes[resourceName('get', type)] = getOne
+  routes[resourceName('create', type)] = create
+  routes[resourceName('update', type)] = update
+  routes[resourceName('delete', type)] = del
 
   // Create aliased, plural version of and endpoint
   // for a bulk request
   if (globalConfig.bulk === true) {
-    initiateResource[resourceName('create', type, true)] = create
-    initiateResource[resourceName('update', type, true)] = update
-    initiateResource[resourceName('delete', type, true)] = del
+    routes[resourceName('create', type, true)] = create
+    routes[resourceName('update', type, true)] = update
+    routes[resourceName('delete', type, true)] = del
   }
 
   if (!singleton) {
-    initiateResource[resourceName('get', type, true)] = getAll
+    routes[resourceName('get', type, true)] = getAll
   }
 
-  return initiateResource
+  return routes
 }
 
 export default resource

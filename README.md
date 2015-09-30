@@ -22,7 +22,8 @@ let api = sdk({
 });
 
 api()
-  .getProjects()
+  .projects()
+  .get()
   .then(res => {
 
     let resources = serialize.response(res.body);

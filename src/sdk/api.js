@@ -121,6 +121,11 @@ function api (config = {}) {
     type: 'submission-style-board-tag-placements'
   })
 
+  let feedback = makeResource({
+  	type: 'feedback',
+  	plural: 'feedback'
+  })
+
   //// Singletons
 
   let recipient = makeResource({
@@ -187,6 +192,7 @@ function api (config = {}) {
     ...submissionStyleBoards,
     ...submissionStyleBoardTags,
     ...submissionStyleBoardTagPlacements,
+    ...feedback,
 
     // Singletons
     ...card,

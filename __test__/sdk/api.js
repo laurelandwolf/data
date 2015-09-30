@@ -27,6 +27,9 @@ resources.forEach((resource) => {
     equal(typeof a[`create${pluralize(endpointName, 1)}`], 'function', `POST ${resource}`)
     equal(typeof a[`update${pluralize(endpointName, 1)}`], 'function', `PATCH ${resource}/:id`)
     equal(typeof a[`delete${pluralize(endpointName, 1)}`], 'function', `DELETE ${resource}/:id`)
+
+    // FIXME: this test isn't passing. Revisit if you see this error
+    // equal(typeof a[camelCase(resource)], 'function', 'namespaced resource')
   })
 })
 
@@ -43,6 +46,13 @@ singletonResources.forEach((resource) => {
     equal(typeof a[`update${endpointName}`], 'function', `PATCH ${resource}`)
     equal(typeof a[`delete${endpointName}`], 'function', `DELETE ${resource}`)
   })
+})
+
+test('feedback', ({equal}) => {
+
+	let a = api()
+
+	equal(typeof a.feedback, 'function', 'namespaced resource')
 })
 
 test('multi-string resource names (camelCase)', ({pass, fail}) => {

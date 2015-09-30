@@ -95,9 +95,17 @@ function resource (spec, globalConfig = {}) {
     }, globalConfig)
   }
 
-  let resourceType = formattedType(type, (!singleton || globalConfig.bulk === true))
+  function resourceTypeName () {
+
+  	if (spec.plural) {
+  		return formattedType(spec.plural)
+  	}
+
+  	return formattedType(type, (!singleton || globalConfig.bulk === true))
+  }
+
   let routes = {
-  	[resourceType]: function (/* TODO: options here */) {
+  	[resourceTypeName()]: function (/* TODO: options here */) {
 
 			return {
 				get (id) {

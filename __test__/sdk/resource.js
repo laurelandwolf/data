@@ -4,6 +4,7 @@ import {namespace} from 'tessed'
 import resource from '../../src/sdk/resource'
 
 let test = namespace('resource')
+test.plural = test.namespace('custom plural')
 test.getAll = test.namespace('get all')
 test.getAll.next = test.getAll.namespace('NEXT')
 test.getOne = test.namespace('get one')
@@ -49,6 +50,19 @@ test('excludes "?" if no query string', ({equal, context}) => {
 
       equal(req.url, '/projects', 'url')
     })
+})
+
+test.plural('with custom plural', ({equal, plan}) => {
+
+	let r = resource({
+		type: 'feedback',
+		plural: 'feedback'
+	})
+
+	return r.feedback().get().then(res => {
+
+		equal(res.body.url, '/feedback', 'url')
+	})
 })
 
 test.getAll('no querystring', ({equal, context}) => {

@@ -4,6 +4,7 @@ import pluralize from 'pluralize'
 import validate from './utils/validate'
 import endpoint from './endpoint'
 
+// NOTE: this will be deprecated
 function resourceName (method, type, plural = false) {
 
   return `${method.toLowerCase()}${capitalize(formattedType(type, plural))}`
@@ -95,9 +96,17 @@ function resource (spec, globalConfig = {}) {
     }, globalConfig)
   }
 
-  let resourceType = formattedType(type, (!singleton || globalConfig.bulk === true))
+  function resourceTypeName () {
+
+  	if (spec.plural) {
+  		return formattedType(spec.plural)
+  	}
+
+  	return formattedType(type, (!singleton || globalConfig.bulk === true))
+  }
+
   let routes = {
-  	[resourceType]: function (/* TODO: options here */) {
+  	[resourceTypeName()]: function (/* TODO: options here */) {
 
 			return {
 				get (id) {
@@ -111,6 +120,7 @@ function resource (spec, globalConfig = {}) {
   	}
   }
 
+  // NOTE: these will be deprecated
   routes[resourceName('get', type)] = getOne
   routes[resourceName('create', type)] = create
   routes[resourceName('update', type)] = update

@@ -8,3 +8,6 @@ browsers:
     version: '10..latest'
   - name: iphone
     version: 'latest'
+browserify:
+  - transform: babelify
+    stage: 0

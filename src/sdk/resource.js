@@ -1,5 +1,6 @@
 import {capitalize, defaults, camelCase} from 'lodash'
 import pluralize from 'pluralize'
+import {Observable} from 'rx-lite'
 
 import validate from './utils/validate'
 import endpoint from './endpoint'
@@ -15,9 +16,14 @@ function formattedType (type, plural = false) {
 	return pluralize(camelCase(type), plural ? 2 : 1)
 }
 
+function streamingResource () {
+
+}
+
 function resource (spec, globalConfig = {}) {
 
   let {type, singleton} = defaults(spec, {singleton: false})
+  let {streamSource, _stream} = globalConfig
 
   validate.type(type)
 
@@ -105,9 +111,27 @@ function resource (spec, globalConfig = {}) {
   	return formattedType(type, (!singleton || globalConfig.bulk === true))
   }
 
+  function singularDashResourceTypeName (type) {
+
+
+  }
+
   let routes = {
   	[resourceTypeName()]: function (/* TODO: options here */) {
 
+  		// Observable interface
+  		// TODO: Need to refactor this.
+  		//       This is ugly! It should be it's own class
+		  if (_stream) {
+		  	return Observable.create(observer => {
+
+		  		streamSource
+		  			.filter(res => res.data.attributes.key === singularDashResourceTypeName(type))
+		  			.forEach(observer.onNext)
+		  	})
+		  }
+
+		  // HTTP interface
 			return {
 				get (id) {
 

@@ -4,7 +4,8 @@ import {sdk, serialize} from '../src'
 import serializeDirect from '../src/serialize'
 import sdkDirect from '../src/sdk'
 
-let test = namespace('root exports')
+let test = namespace('sdk')
+test.streaming = namespace('streaming')
 
 test('root', ({deepEqual}) => {
 
@@ -12,25 +13,28 @@ test('root', ({deepEqual}) => {
   deepEqual(serialize, serializeDirect, 'serialize')
 })
 
+test.streaming.only('subscribe to all', ({plan}) => {
 
+	plan(1)
 
+	let api = sdk({
+		streaming: {
 
+		}
+	})
 
+	return done => {
 
-// let api = sdk({
-// 	stream: {
-// 		PUSHER_APP_KEY
-// 	}
-// })
+		let comments = api()
+			.stream()
+			.comments()
+			// .filter()
+			// .map()
+			// .forEach()
 
-// api()
-// 	.stream() // TODO: throw error if "stream" option is not set in instantiation of sdk
-// 	.comments()
-// 	.created()
-// 	.subscribe()
+		let sub = comments.subscribe(val => {
 
-// api()
-// 	.bulk()
-// 	.comments()
-// 	.create()
-// 	.then()
+			done()
+		})
+	}
+})

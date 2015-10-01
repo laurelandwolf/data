@@ -160,10 +160,23 @@ function api (config = {}) {
     })
   }
 
+  function stream () {
+
+  	if (!config.streaming){
+  		throw new Error('A stream config object must be provided to use the streaming api')
+  	}
+
+  	return api({
+  		...config,
+  		_stream: true
+  	})
+  }
+
   return {
     config,
     fetch,
     bulk,
+    stream,
 
     // Resources
     ...projects,

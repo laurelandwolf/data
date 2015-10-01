@@ -5,6 +5,6 @@ browsers:
   - name: firefox
     version: '40..latest'
   - name: ie
-    version: 'latest'
+    version: '10..latest'
   - name: iphone
     version: 'latest'

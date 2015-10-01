@@ -2,8 +2,18 @@ import {capitalize, defaults, camelCase} from 'lodash'
 import pluralize from 'pluralize'
 import {Observable} from 'rx-lite'
 
-import validate from './utils/validate'
+import pipe from 'ramda/src/pipe'
+import equals from 'ramda/src/equals'
+import head from 'ramda/src/head'
+import split from 'ramda/src/split'
+import prop from 'ramda/src/prop'
+import drop from 'ramda/src/drop'
+import T from 'ramda/src/T'
+
 import endpoint from './endpoint'
+import validate from './utils/validate'
+import {format, normalize} from '../serialize'
+import streamUtils from './utils/stream'
 
 // NOTE: this will be deprecated
 function resourceName (method, type, plural = false) {
@@ -16,16 +26,13 @@ function formattedType (type, plural = false) {
 	return pluralize(camelCase(type), plural ? 2 : 1)
 }
 
-function streamingResource () {
-
-}
-
 function resource (spec, globalConfig = {}) {
 
   let {type, singleton} = defaults(spec, {singleton: false})
-  let {streamSource, _stream} = globalConfig
 
   validate.type(type)
+
+  let {getStream, _stream} = globalConfig
 
   function uri (id) {
 
@@ -102,6 +109,14 @@ function resource (spec, globalConfig = {}) {
     }, globalConfig)
   }
 
+  function streamEvents (action) {
+
+  	return getStream()
+  		.filter(pipe(prop('key'), streamUtils.matchesEventKey(type)))
+  		.filter(pipe(prop('key'), streamUtils.matchesEventAction(action)))
+  		.map(prop('body'))
+  }
+
   function resourceTypeName () {
 
   	if (spec.plural) {
@@ -113,33 +128,19 @@ function resource (spec, globalConfig = {}) {
 
   function singularDashResourceTypeName (type) {
 
-
+  	return pluralize(format.camelCase(type), 1)
   }
 
   let routes = {
   	[resourceTypeName()]: function (/* TODO: options here */) {
 
-  		// Observable interface
-  		// TODO: Need to refactor this.
-  		//       This is ugly! It should be it's own class
-		  if (_stream) {
-		  	return Observable.create(observer => {
-
-		  		streamSource
-		  			.filter(res => res.data.attributes.key === singularDashResourceTypeName(type))
-		  			.forEach(observer.onNext)
-		  	})
-		  }
-
 		  // HTTP interface
 			return {
-				get (id) {
-
-					return get(id, singleton)
-				},
+				get: (id) => get(id, singleton),
 				create,
 				update,
-				'delete': del
+				'delete': del,
+				stream: streamEvents
 			}
   	}
   }
@@ -149,7 +150,6 @@ function resource (spec, globalConfig = {}) {
   routes[resourceName('create', type)] = create
   routes[resourceName('update', type)] = update
   routes[resourceName('delete', type)] = del
-
   // Create aliased, plural version of and endpoint
   // for a bulk request
   if (globalConfig.bulk === true) {
@@ -157,7 +157,6 @@ function resource (spec, globalConfig = {}) {
     routes[resourceName('update', type, true)] = update
     routes[resourceName('delete', type, true)] = del
   }
-
   if (!singleton) {
     routes[resourceName('get', type, true)] = getAll
   }

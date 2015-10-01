@@ -96,7 +96,7 @@ test.bulk('resources', ({equal, deepEqual}) => {
   }, 'bulk api headers')
 })
 
-test.stream('resources', ({equal, deepEqual, fail, pass}) => {
+test.stream.skip('resources', ({equal, deepEqual, fail, pass}) => {
 
 	equal(typeof api().stream, 'function', 'function on api')
 

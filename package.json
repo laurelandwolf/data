@@ -10,7 +10,7 @@
     "clean": "rm -rf ./dist",
     "bundle": "babel --stage 0 src --out-dir dist",
     "prepublish": "npm run clean && npm run bundle",
-    "spike": "budo spike/index.js --live -- -t babelify | garnish"
+    "spike": "budo spike/index.js --live -- -t [babelify --stage 0 ] | garnish"
   },
   "dependencies": {
     "as-array": "^2.0.0",

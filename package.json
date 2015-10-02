@@ -8,6 +8,7 @@
     "test-ci": "zuul -- __test__/index.js __test__/sdk/*.js __test__/serialize/*.js",
     "test-browser": "zuul --local -- __test__/index.js __test__/sdk/*.js __test__/serialize/*.js",
     "lint": "lw lint src/ --cache .tmp/lint.json",
+    "lint-watch": "npm run lint -- --watch",
     "clean": "rm -rf ./dist",
     "bundle": "babel --stage 0 src --out-dir dist",
     "prepublish": "npm run clean && npm run bundle",

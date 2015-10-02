@@ -1,5 +1,5 @@
 {
-  "name": "lw-data",
+  "name": "@laurelandwolf/data",
   "version": "1.0.0",
   "description": "Laurel & Wolf Cowboy Data",
   "main": "dist/index.js",

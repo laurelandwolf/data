@@ -1,8 +1,8 @@
-/*global Pusher, ActiveXObject*/
+/*global ActiveXObject*/
 
 import curry from 'ramda/src/curry'
 
-export default curry(function (contentTypeheader, acceptHeader, socketId, callback) {
+export default curry(function (Pusher, contentTypeheader, acceptHeader, socketId, callback) {
 
 	let self = this
 	let xhr

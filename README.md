@@ -2,7 +2,7 @@
 
 Laurel & Wolf Cowboy Data
 
-![data_star_trek](https://cloud.githubusercontent.com/assets/974723/9012467/fd3ec36e-3769-11e5-8525-a4e9536a533e.jpg)
+![Data](https://cloud.githubusercontent.com/assets/974723/10259350/ded875a8-691b-11e5-8d71-39b0db46c117.gif)
 
 ## Install
 

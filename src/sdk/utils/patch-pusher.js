@@ -1,3 +1,5 @@
+/*global Pusher, ActiveXObject*/
+
 import curry from 'ramda/src/curry'
 
 export default curry(function (contentTypeheader, acceptHeader, socketId, callback) {
@@ -12,12 +14,12 @@ export default curry(function (contentTypeheader, acceptHeader, socketId, callba
 		xhr = (window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))
 	}
 
-	xhr.open("POST", self.options.authEndpoint, true)
+	xhr.open('POST', self.options.authEndpoint, true)
 
 	// add request headers
 	xhr.setRequestHeader('Content-Type', `${contentTypeheader}; ext=pusher-authentication`)
 	xhr.setRequestHeader('Accept', `${acceptHeader}; ext=pusher-authentication`)
-	for(let headerName in this.authOptions.headers) {
+	for (let headerName in this.authOptions.headers) {
 		xhr.setRequestHeader(headerName, this.authOptions.headers[headerName])
 	}
 
@@ -25,14 +27,15 @@ export default curry(function (contentTypeheader, acceptHeader, socketId, callba
 
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200) {
-				let data, parsed = false
+				let data
+				let parsed = false
 
 				try {
 					data = JSON.parse(xhr.responseText)
 					parsed = true
 				}
 				catch (e) {
-					callback(true, 'JSON returned from webapp was invalid, yet status code was 200. Data was: ' + xhr.responseText)
+					callback(true, `JSON returned from webapp was invalid, yet status code was 200. Data was: ${xhr.responseText}`)
 				}
 
 				if (parsed) { // prevents double execution.

@@ -17,7 +17,7 @@ function formatRequestRelationships (relationships) {
           }
         }]
       }
-      else if(Array.isArray(data)) {
+      else if (Array.isArray(data)) {
         return [name, {
           data: map(data, (val) => {
 
@@ -27,17 +27,15 @@ function formatRequestRelationships (relationships) {
                 id: val
               }
             }
-            else {
-              return val
-            }
+
+            return val
           })
         }]
       }
-      else {
-        return [name, {
-          data
-        }]
-      }
+
+      return [name, {
+        data
+      }]
     })
     .zipObject()
     .value()

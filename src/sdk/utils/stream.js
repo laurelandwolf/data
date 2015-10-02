@@ -4,11 +4,10 @@ import pipe from 'ramda/src/pipe'
 import equals from 'ramda/src/equals'
 import head from 'ramda/src/head'
 import split from 'ramda/src/split'
-import prop from 'ramda/src/prop'
 import drop from 'ramda/src/drop'
 import T from 'ramda/src/T'
 
-import {format, normalize} from '../../serialize'
+import {format} from '../../serialize'
 
 function matchesEventAction (action) {
 

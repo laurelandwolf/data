@@ -17,9 +17,8 @@ function dashCase (data) {
     if (startsWithDash(data)) {
       return `-${kebabCase(removeFirstDash(data))}`
     }
-    else {
-      return kebabCase(data)
-    }
+
+    return kebabCase(data)
   }
 }
 

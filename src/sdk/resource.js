@@ -1,18 +1,11 @@
 import {capitalize, defaults, camelCase} from 'lodash'
 import pluralize from 'pluralize'
-import {Observable} from 'rx-lite'
 
 import pipe from 'ramda/src/pipe'
-import equals from 'ramda/src/equals'
-import head from 'ramda/src/head'
-import split from 'ramda/src/split'
 import prop from 'ramda/src/prop'
-import drop from 'ramda/src/drop'
-import T from 'ramda/src/T'
 
 import endpoint from './endpoint'
 import validate from './utils/validate'
-import {format, normalize} from '../serialize'
 import streamUtils from './utils/stream'
 
 // NOTE: this will be deprecated
@@ -32,7 +25,7 @@ function resource (spec, globalConfig = {}) {
 
   validate.type(type)
 
-  let {getStream, _stream} = globalConfig
+  let {getStream} = globalConfig
 
   function uri (id) {
 
@@ -44,9 +37,9 @@ function resource (spec, globalConfig = {}) {
     return u
   }
 
-  function get (id, singleton = false) {
+  function get (id, isSingleton = false) {
 
-  	return (id !== undefined || singleton)
+  	return (id !== undefined || isSingleton)
   		? getOne(id)
   		: getAll()
   }
@@ -81,7 +74,9 @@ function resource (spec, globalConfig = {}) {
     }, globalConfig)
   }
 
-  function update (id, attributes) {
+  function update (id, attrs) {
+
+  	let attributes = attrs
 
     if (typeof id === 'object') {
       attributes = id
@@ -124,11 +119,6 @@ function resource (spec, globalConfig = {}) {
   	}
 
   	return formattedType(type, (!singleton || globalConfig.bulk === true))
-  }
-
-  function singularDashResourceTypeName (type) {
-
-  	return pluralize(format.camelCase(type), 1)
   }
 
   let routes = {

@@ -1,7 +1,7 @@
-import sdk from './sdk';
-import serialize from './serialize';
+import sdk from './sdk'
+import serialize from './serialize'
 
 export default {
   sdk,
   serialize
-};
+}

@@ -1,14 +1,12 @@
-import {assign} from 'lodash';
-
-import resource from './resource';
-import request from './request';
-import {BULK_HEADERS} from './headers';
+import resource from './resource'
+import request from './request'
+import {BULK_HEADERS} from './headers'
 
 function api (config = {}) {
 
   function makeResource (options) {
 
-    return resource(options, config);
+    return resource(options, config)
   }
 
   let projects = makeResource({
@@ -21,128 +19,133 @@ function api (config = {}) {
     // singular: 'project',
     // plural: 'projects',
     // uri: 'projects' <~~~~~~~~~~~ use that to override name
-  });
+  })
 
   let designers = makeResource({
     type: 'designers'
-  });
+  })
 
   let rooms = makeResource({
     type: 'rooms'
-  });
+  })
 
   let floorPlans = makeResource({
     type: 'floor-plans'
-  });
+  })
 
   let comments = makeResource({
     type: 'comments'
-  });
+  })
 
   let photos = makeResource({
     type: 'photos'
-  });
+  })
 
   let inspirationLinks = makeResource({
     type: 'inspiration-links'
-  });
+  })
 
   let inspirationImages = makeResource({
     type: 'inspiration-images'
-  });
+  })
 
   let furniture = makeResource({
     type: 'furniture'
-  });
+  })
 
   let designPackageFloorPlans = makeResource({
     type: 'design-package-floor-plans'
-  });
+  })
 
   let styleBoards = makeResource({
     type: 'style-boards'
-  });
+  })
 
   let styleBoardTags = makeResource({
     type: 'style-board-tags'
-  });
+  })
 
   let designPackageInstructions = makeResource({
     type: 'design-package-instructions'
-  });
+  })
 
   let designPackages = makeResource({
     type: 'design-packages'
-  });
+  })
 
   let portfolioImages = makeResource({
     type: 'portfolio-images'
-  });
+  })
 
   let medias = makeResource({
     type: 'media'
-  });
+  })
 
   let shoppinglistItems = makeResource({
     type: 'shopping-list-items'
-  });
+  })
 
   let users = makeResource({
     type: 'users'
-  });
+  })
 
   let shoppingCarts = makeResource({
     type: 'shopping-carts'
-  });
+  })
 
   let shoppingCartItems = makeResource({
     type: 'shopping-cart-items'
-  });
+  })
 
   let charges = makeResource({
     type: 'charges'
-  });
+  })
 
   let invitations = makeResource({
     type: 'invitations'
-  });
+  })
 
   let submissions = makeResource({
     type: 'submissions'
-  });
+  })
 
   let submissionStyleBoards = makeResource({
     type: 'submission-style-boards'
-  });
+  })
 
   let submissionStyleBoardTags = makeResource({
     type: 'submission-style-board-tags'
-  });
+  })
 
   let submissionStyleBoardTagPlacements = makeResource({
     type: 'submission-style-board-tag-placements'
-  });
+  })
+
+  let feedback = makeResource({
+  	type: 'feedback',
+  	plural: 'feedback'
+  })
 
   //// Singletons
 
   let recipient = makeResource({
     type: 'recipient',
     singleton: true
-  });
+  })
 
   let card = makeResource({
     type: 'card',
     singleton: true
-  });
+  })
 
   let bankAccount = makeResource({
     type: 'bank-account',
     singleton: true
-  });
+  })
 
   function fetch (...args) {
 
-    return request(config).fetch(...args);
+    return request(config).fetch(...args)
   }
 
   function bulk () {
@@ -154,50 +157,61 @@ function api (config = {}) {
         ...BULK_HEADERS
       },
       bulk: true
-    });
+    })
   }
 
-  return assign(
-    {},
-    {config},
+  function stream () {
+
+  	if (!config.streaming){
+  		throw new Error('A stream config object must be provided to use the streaming api')
+  	}
+
+  	return api({
+  		...config,
+  		_stream: true
+  	})
+  }
+
+  return {
+    config,
+    fetch,
+    bulk,
+    stream,
 
     // Resources
-    projects,
-    designers,
-    rooms,
-    floorPlans,
-    comments,
-    photos,
-    inspirationLinks,
-    inspirationImages,
-    furniture,
-    designPackageFloorPlans,
-    styleBoards,
-    styleBoardTags,
-    designPackageInstructions,
-    designPackages,
-    portfolioImages,
-    medias,
-    shoppinglistItems,
-    users,
-    shoppingCarts,
-    shoppingCartItems,
-    charges,
-    invitations,
-    submissions,
-    submissionStyleBoards,
-    submissionStyleBoardTags,
-    submissionStyleBoardTagPlacements,
+    ...projects,
+    ...designers,
+    ...rooms,
+    ...floorPlans,
+    ...comments,
+    ...photos,
+    ...inspirationLinks,
+    ...inspirationImages,
+    ...furniture,
+    ...designPackageFloorPlans,
+    ...styleBoards,
+    ...styleBoardTags,
+    ...designPackageInstructions,
+    ...designPackages,
+    ...portfolioImages,
+    ...medias,
+    ...shoppinglistItems,
+    ...users,
+    ...shoppingCarts,
+    ...shoppingCartItems,
+    ...charges,
+    ...invitations,
+    ...submissions,
+    ...submissionStyleBoards,
+    ...submissionStyleBoardTags,
+    ...submissionStyleBoardTagPlacements,
+    ...feedback,
 
     // Singletons
-    recipient,
-    card,
-    bankAccount,
-    {
-      fetch,
-      bulk
-    }
-  );
+    ...card,
+    ...recipient,
+    ...bankAccount
+  }
 }
 
-export default api;
+export default api

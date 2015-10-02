@@ -1,15 +1,17 @@
 {
   "name": "lw-data",
-  "version": "0.6.1",
+  "version": "1.0.0",
   "description": "Laurel & Wolf Cowboy Data",
   "main": "dist/index.js",
   "scripts": {
-    "test": "npm run lint && hihat __test__/index.js __test__/sdk/*.js __test__/serialize/*.js -- --transform [babelify --stage 0] -p tap-dev-tool",
+    "test": "hihat __test__/index.js __test__/sdk/*.js __test__/serialize/*.js -- --transform [babelify --stage 0] -p tap-dev-tool",
     "test-ci": "zuul -- __test__/index.js __test__/sdk/*.js __test__/serialize/*.js",
+    "test-browser": "zuul --local -- __test__/index.js __test__/sdk/*.js __test__/serialize/*.js",
     "lint": "lw lint src/ --cache .tmp/lint.json",
     "clean": "rm -rf ./dist",
     "bundle": "babel --stage 0 src --out-dir dist",
-    "prepublish": "npm run clean && npm run bundle"
+    "prepublish": "npm run clean && npm run bundle",
+    "spike": "budo spike/index.js --live -- -t [babelify --stage 0 ] | garnish"
   },
   "dependencies": {
     "as-array": "^2.0.0",
@@ -17,18 +19,22 @@
     "is-promise": "^2.0.0",
     "join-path": "^1.1.0",
     "lodash": "^3.10.0",
-    "pluralize": "^1.1.5"
+    "pluralize": "^1.1.5",
+    "pusher": "^1.0.6",
+    "ramda": "^0.17.1",
+    "rx-lite": "^4.0.0"
   },
   "devDependencies": {
     "babel": "^5.8.23",
     "babelify": "^6.2.0",
     "es6-promise": "^3.0.2",
-    "lw-build": "^1.1.2",
+    "eslint-plugin-lw": "^1.0.0",
+    "lw-build": "^1.1.3",
     "mock-fetch": "^1.0.0",
     "tap-dev-tool": "^1.3.0",
     "tap-spec": "^4.1.0",
-    "tessed": "^2.0.0",
-    "zuul": "^3.3.1"
+    "tessed": "^2.2.0",
+    "zuul": "^3.6.0"
   },
   "browserify": {
     "transform": [

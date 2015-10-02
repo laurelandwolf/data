@@ -12,21 +12,61 @@ npm install lw-data --save
 
 ## Usage
 
+**HTTP**
+
 ```js
-import {sdk, serialize} from 'lw-data';
+import {sdk, serialize} from 'lw-data'
 
 let api = sdk({
   headers: {
     custom : 'header'
   }
-});
+})
 
 api()
-  .getProjects()
+  .projects()
+  .get()
   .then(res => {
 
     let resources = serialize.response(res.body);
     console.log(resources);
-  });
+  })
 ```
 
+**Streaming**
+
+```js
+import {sdk} from 'lw-data'
+
+let api = sdk({
+  headers: {
+    custom : 'header'
+  }
+})
+
+api.createStream(({headers}) => {
+
+	// return observable
+})
+
+api()
+  .projects()
+  .stream('created')
+  .subscribe(res => {
+
+    
+  })
+
+api.createStream(({headers}) => {
+
+	// return observable
+})
+
+api()
+  .submissions()
+  .stream()
+  .subscribe(res => {
+
+    
+  })
+```

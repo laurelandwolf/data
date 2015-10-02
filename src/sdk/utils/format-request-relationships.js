@@ -1,6 +1,6 @@
-import _, {map} from 'lodash';
-import pluralize from 'pluralize';
-import isNumber from 'is-number';
+import _, {map} from 'lodash'
+import pluralize from 'pluralize'
+import isNumber from 'is-number'
 
 function formatRequestRelationships (relationships) {
 
@@ -15,7 +15,7 @@ function formatRequestRelationships (relationships) {
             type: pluralize(name, 2),
             id: data
           }
-        }];
+        }]
       }
       else if(Array.isArray(data)) {
         return [name, {
@@ -25,22 +25,22 @@ function formatRequestRelationships (relationships) {
               return {
                 type: pluralize(name, 2),
                 id: val
-              };
+              }
             }
             else {
-              return val;
+              return val
             }
           })
-        }];
+        }]
       }
       else {
         return [name, {
           data
-        }];
+        }]
       }
     })
     .zipObject()
-    .value();
+    .value()
 }
 
-export default formatRequestRelationships;
+export default formatRequestRelationships

@@ -2,14 +2,14 @@ import _, {
   map,
   union,
   forEach
-} from 'lodash';
-import asArray from 'as-array';
+} from 'lodash'
+import asArray from 'as-array'
 
-import {dashCase} from '../../serialize/format';
+import {dashCase} from '../../serialize/format'
 
 function qshash () {
 
-  let list = {};
+  let list = {}
 
   function parseFields (fields, ...newFields) {
 
@@ -18,48 +18,48 @@ function qshash () {
 
         // Convert to formatted object
         if (typeof field === 'string') {
-          let [rel, name] = field.split('.');
+          let [rel, name] = field.split('.')
           field = {
             [dashCase(rel)]: dashCase(name)
-          };
+          }
         }
 
-        return field;
+        return field
       })
       .forEach((fieldsMap) => {
 
         forEach(fieldsMap, (val, key) => {
 
-          let name = dashCase(key);
-          let values = map(asArray(val), dashCase);
+          let name = dashCase(key)
+          let values = map(asArray(val), dashCase)
 
-          fields[name] = union(fields[name], values);
-        });
+          fields[name] = union(fields[name], values)
+        })
       })
-      .value();
+      .value()
 
-    return fields;
+    return fields
   }
 
   return {
     add (...newFields) {
 
-      list = parseFields(list, ...newFields);
+      list = parseFields(list, ...newFields)
     },
 
     stringify () {
 
       return map(list, (values, scope) => {
 
-        return `fields[${scope}]=${values.join(',')}`;
-      }).join('&');
+        return `fields[${scope}]=${values.join(',')}`
+      }).join('&')
     },
 
     count () {
 
-      return Object.keys(list).length;
+      return Object.keys(list).length
     }
-  };
+  }
 }
 
-export default qshash;
+export default qshash

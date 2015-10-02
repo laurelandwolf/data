@@ -4,7 +4,10 @@ browsers:
     version: '44..latest'
   - name: firefox
     version: '40..latest'
-  - name: ie
-    version: 'latest'
   - name: iphone
     version: 'latest'
+browserify:
+  - transform:
+      name: babelify
+      compact: false
+      stage: 0

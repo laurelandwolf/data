@@ -39,7 +39,7 @@ test('default headers', ({deepEqual}) => {
   }, 'configured headers')
 })
 
-test('custom headers', ({equal}) => {
+test('custom headers', ({deepEqual}) => {
 
   let api = sdk({
     headers: {
@@ -47,7 +47,33 @@ test('custom headers', ({equal}) => {
     }
   })
 
-  equal(api().config.headers.custom, 'header', 'custom header set')
+  deepEqual(api().config.headers, {
+    'Content-Type': 'application/vnd.api+json',
+    'Accept': 'application/vnd.api+json',
+    'custom': 'header'
+  }, 'all headers')
+})
+
+test('custom instance headers', ({deepEqual}) => {
+
+	let api = sdk({
+	  headers: {
+	    custom: 'header'
+	  }
+	})
+
+	deepEqual(
+		api({
+			headers: {inst: 'header'}
+		}).config.headers,
+		{
+			'Content-Type': 'application/vnd.api+json',
+			'Accept': 'application/vnd.api+json',
+			'custom': 'header',
+			'inst': 'header'
+		},
+		'all headers'
+	)
 })
 
 test('sets origin', ({equal}) => {

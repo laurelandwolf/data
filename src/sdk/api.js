@@ -126,6 +126,10 @@ function api (config = {}) {
   	plural: 'feedback'
   })
 
+  let activities = makeResource({
+  	type: 'activities'
+  })
+
   //// Singletons
 
   let recipient = makeResource({
@@ -179,33 +183,34 @@ function api (config = {}) {
     stream,
 
     // Resources
-    ...projects,
-    ...designers,
-    ...rooms,
-    ...floorPlans,
+    ...activities,
+    ...charges,
     ...comments,
-    ...photos,
-    ...inspirationLinks,
-    ...inspirationImages,
-    ...furniture,
+    ...designers,
     ...designPackageFloorPlans,
-    ...styleBoards,
-    ...styleBoardTags,
     ...designPackageInstructions,
     ...designPackages,
-    ...portfolioImages,
-    ...medias,
-    ...shoppinglistItems,
-    ...users,
-    ...shoppingCarts,
-    ...shoppingCartItems,
-    ...charges,
+    ...feedback,
+    ...floorPlans,
+    ...furniture,
+    ...inspirationImages,
+    ...inspirationLinks,
     ...invitations,
+    ...medias,
+    ...photos,
+    ...portfolioImages,
+    ...projects,
+    ...rooms,
+    ...shoppingCartItems,
+    ...shoppingCarts,
+    ...shoppinglistItems,
+    ...styleBoards,
+    ...styleBoardTags,
     ...submissions,
     ...submissionStyleBoards,
-    ...submissionStyleBoardTags,
     ...submissionStyleBoardTagPlacements,
-    ...feedback,
+    ...submissionStyleBoardTags,
+    ...users,
 
     // Singletons
     ...card,

@@ -29,8 +29,10 @@ resources.forEach((resource) => {
     equal(typeof a[`update${pluralize(endpointName, 1)}`], 'function', `PATCH ${resource}/:id`)
     equal(typeof a[`delete${pluralize(endpointName, 1)}`], 'function', `DELETE ${resource}/:id`)
 
-    // FIXME: this test isn't passing. Revisit if you see this error
-    // equal(typeof a[camelCase(resource)], 'function', 'namespaced resource')
+    // FIXME: this test isn't passing for "furniture"
+    if (resource !== 'furniture') {
+	    equal(typeof a[camelCase(resource)], 'function', 'namespaced resource')
+    }
   })
 })
 

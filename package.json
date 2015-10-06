@@ -1,7 +1,7 @@
 {
   "name": "@laurelandwolf/data",
-  "version": "1.0.2",
-  "description": "Laurel & Wolf Cowboy Data",
+  "version": "1.1.0",
+  "description": "Laurel & Wolf Data",
   "main": "dist/index.js",
   "scripts": {
     "test": "hihat __test__/index.js __test__/sdk/*.js __test__/serialize/*.js -- --transform [babelify --stage 0] -p tap-dev-tool",

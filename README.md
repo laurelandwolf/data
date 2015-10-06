@@ -1,6 +1,6 @@
 # data
 
-Laurel & Wolf Cowboy Data
+Laurel & Wolf Data
 
 ![Data](https://cloud.githubusercontent.com/assets/974723/10259350/ded875a8-691b-11e5-8d71-39b0db46c117.gif)
 
@@ -54,7 +54,7 @@ api()
   .stream('created')
   .subscribe(res => {
 
-    
+
   })
 
 api.createStream(({headers}) => {
@@ -67,6 +67,6 @@ api()
   .stream()
   .subscribe(res => {
 
-    
+
   })
 ```

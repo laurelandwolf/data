@@ -14,7 +14,7 @@ function connect (config) {
     }
   })
 
-  let channel = pusher.subscribe(`private-user@${user.id}`)
+  let channel = pusher.subscribe(`private-${user.type.toLowerCase()}@${user.id}`)
 
   function subscribe (fn) {
 

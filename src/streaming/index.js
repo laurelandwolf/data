@@ -15,14 +15,15 @@ function connect (config) {
   })
 
   let channel = pusher.subscribe(`private-${user.type.toLowerCase()}@${user.id}`)
+  let subscriptions = []
 
-  function subscribe (fn) {
-
-  	channel.bind_all(fn)
-  }
+	channel.bind_all((...args) => subscriptions.forEach(sub => sub(...args)))
 
 	return {
-		subscribe
+		subscribe (fn) {
+
+      subscriptions.push(fn)
+    }
 	}
 }
 

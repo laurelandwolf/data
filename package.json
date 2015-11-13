@@ -10,7 +10,7 @@
     "lint": "lw lint src/ --cache .tmp/lint.json",
     "lint-watch": "npm run lint -- --watch",
     "clean": "rm -rf ./dist",
-    "bundle": "babel --stage 0 src --out-dir dist",
+    "bundle": "babel src --out-dir dist --presets stage-0",
     "prepublish": "npm run clean && npm run bundle",
     "spike": "budo spike/index.js --live -- -t [babelify --stage 0 ] | garnish"
   },
@@ -23,7 +23,8 @@
     "pluralize": "^1.1.5",
     "pusher-js": "^3.0.0",
     "ramda": "^0.17.1",
-    "rx-lite": "^4.0.0"
+    "rx-lite": "^4.0.0",
+    "babel-preset-stage-0": "^6.1.18"
   },
   "devDependencies": {
     "babel": "^5.8.23",

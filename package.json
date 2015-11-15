@@ -46,7 +46,7 @@
       [
         "babelify",
         {
-          "stage": "0"
+          "presets": "stage-0"
         }
       ]
     ]

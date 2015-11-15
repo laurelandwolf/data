@@ -11,6 +11,7 @@
     "lint-watch": "npm run lint -- --watch",
     "clean": "rm -rf ./dist",
     "bundle": "babel src --out-dir dist --presets stage-0",
+    "postinstall": "npm run bundle",
     "prepublish": "npm run clean && npm run bundle",
     "spike": "budo spike/index.js --live -- -t [babelify --stage 0 ] | garnish"
   },

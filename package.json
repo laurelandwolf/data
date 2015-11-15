@@ -22,13 +22,14 @@
     "lodash": "^3.10.0",
     "pluralize": "^1.1.5",
     "pusher-js": "^3.0.0",
-    "ramda": "^0.17.1",
-    "rx-lite": "^4.0.0",
-    "babel-preset-stage-0": "^6.1.18"
+    "ramda": "^0.18.0",
+    "rx-lite": "^4.0.0"
   },
   "devDependencies": {
-    "babel": "^5.8.23",
-    "babelify": "^6.2.0",
+    "babel": "^6.0.0",
+    "babel-cli": "^6.1.18",
+    "babel-preset-stage-0": "^6.1.18",
+    "babelify": "^7.2.0",
     "budo": "^5.1.1",
     "es6-promise": "^3.0.2",
     "eslint-plugin-lw": "^1.0.0",

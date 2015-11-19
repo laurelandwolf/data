@@ -134,6 +134,10 @@ function api (config = {}) {
     type: 'quizzes'
   })
 
+  let quizResults = makeResource({
+    type: 'quiz-results'
+  })
+
   //// Singletons
 
   let recipient = makeResource({
@@ -204,6 +208,7 @@ function api (config = {}) {
     ...photos,
     ...portfolioImages,
     ...projects,
+    ...quizResults,
     ...quizzes,
     ...rooms,
     ...shoppingCartItems,

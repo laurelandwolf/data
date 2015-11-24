@@ -1360,7 +1360,7 @@ test.singleton('PATCH', ({context, equal, deepEqual}) => {
         data: {
           type: 'recipient',
           attributes: {
-            taxId: '000000000'
+            'tax-id': '000000000'
           }
         }
       })
@@ -1379,7 +1379,7 @@ test.singleton.next('PATCH', ({context, equal, deepEqual}) => {
         data: {
           type: 'recipient',
           attributes: {
-            taxId: '000000000'
+            'tax-id': '000000000'
           }
         }
       })

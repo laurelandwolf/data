@@ -1,4 +1,4 @@
-import {reduce, map} from 'lodash'
+import {reduce, map, isEmpty} from 'lodash'
 import asArray from 'as-array'
 
 import {camelCase, dashCase} from './format'
@@ -23,20 +23,24 @@ function formatRelationshipData (resource, formatter = camelCase) {
 
 function formatRelationships (relationships, formatter = camelCase) {
 
-  return reduce(relationships, (rels, value, typeName) => {
+  let result = reduce(relationships, (rels, value, typeName) => {
 
     rels[formatter(typeName)] = formatRelationshipData(value, formatter)
     return rels
   }, {})
+
+  return isEmpty(result) ? undefined : result
 }
 
 function formatAttributes (attributes, formatter = camelCase) {
 
-  return reduce(attributes, (attrs, value, attrKey) => {
+  let result = reduce(attributes, (attrs, value, attrKey) => {
 
     attrs[formatter(attrKey)] = value
     return attrs
   }, {})
+
+  return isEmpty(result) ? undefined : result
 }
 
 function formatResources (included, formatter = camelCase) {

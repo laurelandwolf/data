@@ -5,6 +5,7 @@ import qshash from './qs-hash'
 import qslist from './qs-list'
 import querySerializer from './query-serializer'
 import formatRequestRelationships from '../utils/format-request-relationships'
+import serialize from '../../serialize'
 
 function endpoint ({uri = '/', method = 'GET', payload} = {}, apiConfig) {
 
@@ -73,9 +74,9 @@ function endpoint ({uri = '/', method = 'GET', payload} = {}, apiConfig) {
         payloadBody = formatPayloadForBulk(payloadBody)
       }
 
-      req[method.toLowerCase()](requestUri, {
+      req[method.toLowerCase()](requestUri, serialize.request({
         data: payloadBody
-      })
+      }))
         .then(resolve)
         .catch(reject)
     })

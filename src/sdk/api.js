@@ -25,6 +25,10 @@ function api (config = {}) {
     type: 'designers'
   })
 
+  let redemptions = makeResource({
+    type: 'redemptions'
+  })
+
   let rooms = makeResource({
     type: 'rooms'
   })
@@ -215,6 +219,7 @@ function api (config = {}) {
     ...quizResults,
     ...quizVotes,
     ...quizzes,
+    ...redemptions,
     ...rooms,
     ...shoppingCartItems,
     ...shoppingCarts,

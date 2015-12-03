@@ -1,5 +1,5 @@
 [
-	"activities",
+  "activities",
   "charges",
   "comments",
   "design-package-floor-plans",
@@ -18,7 +18,7 @@
   "quiz-results",
   "quiz-votes",
   "quizzes",
-	"redemptions",
+  "redemptions",
   "rooms",
   "shopping-list-items",
   "shoppingCartItems",

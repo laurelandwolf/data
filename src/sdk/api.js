@@ -126,12 +126,12 @@ function api (config = {}) {
   })
 
   let feedback = makeResource({
-  	type: 'feedback',
-  	plural: 'feedback'
+    type: 'feedback',
+    plural: 'feedback'
   })
 
   let activities = makeResource({
-  	type: 'activities'
+    type: 'activities'
   })
 
   let quizzes = makeResource({
@@ -182,14 +182,14 @@ function api (config = {}) {
 
   function stream () {
 
-  	if (!config.streaming) {
-  		throw new Error('A stream config object must be provided to use the streaming api')
-  	}
+    if (!config.streaming) {
+      throw new Error('A stream config object must be provided to use the streaming api')
+    }
 
-  	return api({
-  		...config,
-  		_stream: true
-  	})
+    return api({
+      ...config,
+      _stream: true
+    })
   }
 
   return {

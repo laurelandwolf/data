@@ -41,6 +41,10 @@ function api (config = {}) {
     type: 'comments'
   })
 
+  let coupons = makeResource({
+    type: 'coupons'
+  })
+
   let photos = makeResource({
     type: 'photos'
   })
@@ -202,6 +206,7 @@ function api (config = {}) {
     ...activities,
     ...charges,
     ...comments,
+    ...coupons,
     ...designers,
     ...designPackageFloorPlans,
     ...designPackageInstructions,

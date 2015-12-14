@@ -228,6 +228,7 @@ function api (config = {}) {
     ...quizResults,
     ...quizVotes,
     ...quizzes,
+    ...ratings,
     ...redemptions,
     ...rooms,
     ...shoppingCartItems,

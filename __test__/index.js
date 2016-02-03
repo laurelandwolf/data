@@ -5,7 +5,6 @@ import serializeDirect from '../src/serialize'
 import sdkDirect from '../src/sdk'
 
 let test = namespace('sdk')
-test.streaming = namespace('streaming')
 
 test('root', ({deepEqual}) => {
 

@@ -1,6 +1,8 @@
 import {omit, pick, get as _get} from 'lodash'
 import joinPath from 'join-path'
 
+global.window = window
+
 function request (spec = {}) {
 
   if (!window.Promise) {

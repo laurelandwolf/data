@@ -3,12 +3,16 @@ import joinPath from 'join-path'
 
 function request (spec = {}) {
 
+  if (window == null) {
+    global.window = global
+  }
+
   if (!window.Promise) {
-    throw new Error('window.Promise not supported. Please provide a plolyfill.')
+    throw new Error('window.Promise not supported. Please provide a polyfill.')
   }
 
   if (!window.fetch) {
-    throw new Error('window.fetch not supported. Please provide a plolyfill.')
+    throw new Error('window.fetch not supported. Please provide a polyfill.')
   }
 
   let origin = spec.origin || ''

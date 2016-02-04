@@ -3,7 +3,7 @@ import joinPath from 'join-path'
 
 function request (spec = {}) {
 
-  if (window == null) {
+  if (typeof window === 'undefined') {
     global.window = global
   }
 

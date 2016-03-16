@@ -1,5 +1,7 @@
 [
-	"activities",
+
+  "activities",
+  "authorizations",
   "charges",
   "comments",
   "design-package-floor-plans",

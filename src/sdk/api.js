@@ -150,6 +150,10 @@ function api (config = {}) {
     type: 'authorizations'
   })
 
+  let adminNotifications = makeResource({
+    type: 'admin-notifications'
+  })
+
   //// Singletons
 
   let recipient = makeResource({
@@ -204,6 +208,7 @@ function api (config = {}) {
 
     // Resources
     ...activities,
+    ...adminNotifications,
     ...authorizations,
     ...charges,
     ...comments,

@@ -154,6 +154,10 @@ function api (config = {}) {
     type: 'admin-notifications'
   })
 
+  let purchaseRequestInvoices = makeResource({
+    type: 'purchase-request-invoices'
+  })
+
   //// Singletons
 
   let recipient = makeResource({
@@ -226,6 +230,7 @@ function api (config = {}) {
     ...photos,
     ...portfolioImages,
     ...projects,
+    ...purchaseRequestInvoices,
     ...quizResults,
     ...quizVotes,
     ...quizzes,

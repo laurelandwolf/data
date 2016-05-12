@@ -20,7 +20,7 @@
     "join-path": "^1.1.0",
     "lodash": "^3.10.0",
     "pluralize": "^1.1.5",
-    "pusher-js": "^3.0.0",
+    "pusher-js": "~3.0.0",
     "ramda": "^0.17.1",
     "rx-lite": "^4.0.0"
   },

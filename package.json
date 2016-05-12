@@ -1,6 +1,6 @@
 {
   "name": "@laurelandwolf/data",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Laurel & Wolf Data",
   "main": "dist/index.js",
   "scripts": {

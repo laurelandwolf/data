@@ -258,6 +258,8 @@ function api (config = {}) {
     ...submissionStyleBoards,
     ...submissionStyleBoardTagPlacements,
     ...submissionStyleBoardTags,
+    ...coupons,
+    ...redeemableInstructions,
     ...users,
 
     // Singletons

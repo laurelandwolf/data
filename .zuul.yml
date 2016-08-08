@@ -1,11 +1,11 @@
 ui: tape
 browsers:
   - name: chrome
-    version: '44..latest'
+    version: latest
   - name: firefox
-    version: '40..latest'
+    version: latest
   - name: iphone
-    version: 'latest'
+    version: latest
 browserify:
   - transform:
       name: babelify

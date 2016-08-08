@@ -170,6 +170,10 @@ function api (config = {}) {
     type: 'redeemable-instructions'
   })
 
+  let purchaseRequests = makeResource({
+    type: 'purchase-requests'
+  })
+
   //// Singletons
 
   let recipient = makeResource({
@@ -242,6 +246,7 @@ function api (config = {}) {
     ...photos,
     ...portfolioImages,
     ...projects,
+    ...purchaseRequests,
     ...quizResults,
     ...quizVotes,
     ...quizzes,

@@ -1,5 +1,4 @@
 [
-
   "activities",
   "admin-notifications",
   "authorizations",
@@ -18,6 +17,7 @@
   "media",
   "photos",
   "portfolio-images",
+  "purchase-requests",
   "projects",
   "quiz-results",
   "quiz-votes",

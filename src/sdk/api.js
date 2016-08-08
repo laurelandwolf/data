@@ -162,6 +162,14 @@ function api (config = {}) {
     type: 'admin-notifications'
   })
 
+  let coupons = makeResource({
+    type: 'coupons'
+  })
+
+  let redeemableInstructions = makeResource({
+    type: 'redeemable-instructions'
+  })
+
   //// Singletons
 
   let recipient = makeResource({

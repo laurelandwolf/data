@@ -150,6 +150,10 @@ function api (config = {}) {
     type: 'quiz-votes'
   })
 
+  let authorizations = makeResource({
+    type: 'authorizations'
+  })
+
   //// Singletons
 
   let recipient = makeResource({
@@ -204,6 +208,7 @@ function api (config = {}) {
 
     // Resources
     ...activities,
+    ...authorizations,
     ...charges,
     ...comments,
     ...coupons,

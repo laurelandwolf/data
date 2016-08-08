@@ -109,6 +109,14 @@ function api (config = {}) {
     type: 'invitations'
   })
 
+  let referralLinks = makeResource({
+    type: 'referral-links'
+  })
+
+  let referralUses = makeResource({
+    type: 'referral-uses'
+  })
+
   let submissions = makeResource({
     type: 'submissions'
   })
@@ -230,6 +238,8 @@ function api (config = {}) {
     ...quizVotes,
     ...quizzes,
     ...ratings,
+    ...referralLinks,
+    ...referralUses,
     ...rooms,
     ...shoppingCartItems,
     ...shoppingCarts,

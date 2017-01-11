@@ -32,6 +32,18 @@ test('custom origin', ({equal}) => {
     })
 })
 
+test('custom origin with docker-style hostname', ({equal}) => {
+
+  return request({
+    origin: 'http://test'
+  }).get('/path')
+    .then(() => {
+      let req = mockFetch.request()
+
+      equal(req.url, 'http://test/path', 'url with origin')
+    })
+})
+
 test('normalizes path when combining origin and request url', ({equal}) => {
 
   return request({

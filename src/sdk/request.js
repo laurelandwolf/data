@@ -1,5 +1,5 @@
 import {omit, pick, get as _get} from 'lodash'
-import joinPath from 'join-path'
+import {replace} from 'ramda'
 
 function request (spec = {}) {
 
@@ -32,7 +32,10 @@ function request (spec = {}) {
 
       fetchConfig = {...{method: defaultMethod}, ...fetchConfig}
 
-      window.fetch(joinPath(origin, url), fetchConfig)
+      const path = replace(/^\//, '', url || '')
+      const uri = replace(/\/$/, '', origin || '')
+
+      window.fetch([uri, path].join('/'), fetchConfig)
         .then((response) => {
 
           // NOTE: there is no body on a 204 response,

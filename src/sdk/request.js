@@ -35,7 +35,7 @@ function request (spec = {}) {
       const path = replace(/^\//, '', url || '')
       const uri = replace(/\/$/, '', origin || '')
 
-      window.fetch(`${uri}/${path}`, fetchConfig)
+      window.fetch([uri, path].join('/'), fetchConfig)
         .then((response) => {
 
           // NOTE: there is no body on a 204 response,

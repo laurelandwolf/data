@@ -32,8 +32,8 @@ function request (spec = {}) {
 
       fetchConfig = {...{method: defaultMethod}, ...fetchConfig}
 
-      const path = replace(/^\//, '', `${url}`)
-      const uri = replace(/\/$/, '', `${origin}`)
+      const path = replace(/^\//, '', url || '')
+      const uri = replace(/\/$/, '', origin || '')
 
       window.fetch(`${uri}/${path}`, fetchConfig)
         .then((response) => {

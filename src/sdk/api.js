@@ -21,6 +21,10 @@ function api (config = {}) {
     // uri: 'projects' <~~~~~~~~~~~ use that to override name
   })
 
+  let productVariationFlags = makeResource({
+    type: 'product-variation-flags'
+  })
+
   let designers = makeResource({
     type: 'designers'
   })
@@ -245,6 +249,7 @@ function api (config = {}) {
     ...medias,
     ...photos,
     ...portfolioImages,
+    ...productVariationFlags,
     ...projects,
     ...purchaseRequests,
     ...quizResults,

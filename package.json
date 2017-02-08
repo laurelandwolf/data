@@ -4,12 +4,12 @@
   "description": "Laurel & Wolf Data",
   "main": "dist/index.js",
   "scripts": {
-    "test": "hihat __test__/index.js __test__/sdk/*.js __test__/serialize/*.js -- --transform [babelify --stage 0] -p tap-dev-tool",
+    "test": "hihat __test__/index.js __test__/sdk/*.js __test__/serialize/*.js -- --transform [babelify] -p tap-dev-tool",
     "test-ci": "zuul -- __test__/index.js __test__/sdk/*.js __test__/serialize/*.js",
     "test-browser": "zuul --local -- __test__/index.js __test__/sdk/*.js __test__/serialize/*.js",
     "lint:js": "eslint src/ --ext=.js --ext=.jsx --cache --quiet",
     "clean": "rm -rf ./dist",
-    "bundle": "babel --stage 0 src --out-dir dist",
+    "bundle": "babel src --out-dir dist",
     "prepublish": "npm run clean && npm run bundle",
     "spike": "budo spike/index.js --live -- -t [babelify --stage 0 ] | garnish"
   },
@@ -44,10 +44,7 @@
   "browserify": {
     "transform": [
       [
-        "babelify",
-        {
-          "stage": "0"
-        }
+        "babelify"
       ]
     ]
   },

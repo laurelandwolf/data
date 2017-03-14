@@ -174,6 +174,10 @@ function api (config = {}) {
     type: 'purchase-requests'
   })
 
+  let zendeskTickets = makeResource({
+    type: 'zendesk-tickets'
+  })
+
   //// Singletons
 
   let recipient = makeResource({
@@ -266,6 +270,7 @@ function api (config = {}) {
     ...coupons,
     ...redeemableInstructions,
     ...users,
+    ...zendeskTickets,
 
     // Singletons
     ...card,

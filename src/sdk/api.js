@@ -137,6 +137,14 @@ function api (config = {}) {
     type: 'submission-style-board-tag-placements'
   })
 
+  let tagOptionGroups = makeResource({
+    type: 'tag-option-groups'
+  })
+
+  let tagOptionItems = makeResource({
+    type: 'tag-option-items'
+  })
+
   let feedback = makeResource({
   	type: 'feedback',
   	plural: 'feedback'
@@ -274,6 +282,8 @@ function api (config = {}) {
     ...submissionStyleBoardTags,
     ...coupons,
     ...redeemableInstructions,
+    ...tagOptionGroups,
+    ...tagOptionItems,
     ...users,
     ...zendeskTickets,
 

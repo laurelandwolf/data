@@ -8,7 +8,7 @@ function configGlobalSpec (globalSpec) {
 
   let headers
   if (typeof globalSpec.headers === 'function') {
-    headers = {...globalSpec.headers()}
+    headers = globalSpec.headers()
   }
   else {
     headers = globalSpec.headers
@@ -16,29 +16,33 @@ function configGlobalSpec (globalSpec) {
 
   return {
     ...globalSpec,
-    ...{headers}
+    headers
   }
 }
 
-export default function sdk (globalSpec = {}) {
+function configOptions (globalSpec, instanceSpec = {}) {
 
-  let defaultSpec = {
+  const defaultSpec = {
     origin: '',
     headers: DEFAULT_HEADERS
   }
 
-  let options = merge({}, defaultSpec, configGlobalSpec(globalSpec))
+  return merge({}, defaultSpec, configGlobalSpec(globalSpec), instanceSpec)
+}
+
+export default function sdk (globalSpec = {}) {
 
   let stream = Observable.create()
 
   function apiFactory (instanceSpec = {}) {
 
-    options = merge({}, defaultSpec, configGlobalSpec(globalSpec))
-    return api(merge({}, options, instanceSpec, {
-        getStream: () => stream
-    }))
+    return api({
+      ...configOptions(globalSpec, instanceSpec),
+      getStream: () => stream
+    })
   }
-  apiFactory.createStream = callback => stream = callback(options)
+
+  apiFactory.createStream = callback => stream = callback(configOptions(globalSpec))
 
 
   return apiFactory

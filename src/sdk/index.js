@@ -4,23 +4,46 @@ import {merge} from 'lodash'
 import api from './api'
 import {DEFAULT_HEADERS} from './headers'
 
-export default function sdk (globalSpec = {}) {
+function configGlobalSpec (globalSpec) {
 
-  let defaultSpec = {
+  let headers
+  if (typeof globalSpec.headers === 'function') {
+    headers = globalSpec.headers()
+  }
+  else {
+    headers = globalSpec.headers
+  }
+
+  return {
+    ...globalSpec,
+    headers
+  }
+}
+
+function configOptions (globalSpec, instanceSpec = {}) {
+
+  const defaultSpec = {
     origin: '',
     headers: DEFAULT_HEADERS
   }
-  let options = merge({}, defaultSpec, globalSpec)
+
+  return merge({}, defaultSpec, configGlobalSpec(globalSpec), instanceSpec)
+}
+
+export default function sdk (globalSpec = {}) {
+
   let stream = Observable.create()
 
   function apiFactory (instanceSpec = {}) {
 
-  	return api(merge({}, options, instanceSpec, {
-  		getStream: () => stream
-  	}))
+    return api({
+      ...configOptions(globalSpec, instanceSpec),
+      getStream: () => stream
+    })
   }
 
-  apiFactory.createStream = callback => stream = callback(options)
+  apiFactory.createStream = callback => stream = callback(configOptions(globalSpec))
+
 
   return apiFactory
 }

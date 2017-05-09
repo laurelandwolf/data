@@ -11,7 +11,6 @@ let singletonResources = require('./singleton-resources')
 
 let test = namespace('api')
 test.bulk = test.namespace('bulk')
-test.stream = test.namespace('stream')
 test.beforeEach(() => mockFetch.mock())
 test.afterEach(() => mockFetch.restore())
 
@@ -96,24 +95,6 @@ test.bulk('resources', ({equal, deepEqual}) => {
     },
     bulk: true
   }, 'bulk api headers')
-})
-
-test.stream.skip('resources', ({equal, deepEqual, fail, pass}) => {
-
-	equal(typeof api().stream, 'function', 'function on api')
-
-	try {
-		api().stream()
-		fail('should throw error for missing stream config')
-	}
-	catch (e) {
-		pass('throws error for missing stream config')
-	}
-
-	deepEqual(api({streaming: {}}).stream().config, {
-	  _stream: true,
-	  streaming: {}
-	}, 'stream api config')
 })
 
 test.fetch = test.namespace('fetch')
